@@ -7,6 +7,9 @@ from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from rest_framework import status
 from django.contrib.auth.hashers import make_password
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 
 @api_view(['GET', 'POST', 'DELETE'])
 def agents(request):
@@ -55,3 +58,17 @@ def create_user(request):
         except Exception as e:
             return Response({'status': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+class MyTokenObtainPair(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        # serializer = UserSerializerWithToken(self.user).data
+        # for k,v in serializer.items():
+        # data[k] = v
+        
+        data['username'] = self.user.username
+        data['email'] = self.user.email
+        data['first_name'] = self.user.first_name
+        data['last_name'] = self.user.last_name
+        return data
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPair

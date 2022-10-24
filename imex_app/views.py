@@ -90,3 +90,17 @@ def create_profile(request):
         Profile.objects.create(name=name, telephone_number=telephone_number, company=company, company_description=company_description, company_location=company_location, city=city, region=region, user_id=user_id, agent_type_id=agent_type, is_agent=True)
         return Response({"status": "Profile created"})
 
+class MyTokenObtainPair(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        # serializer = UserSerializerWithToken(self.user).data
+        # for k,v in serializer.items():
+        # data[k] = v
+        
+        data['username'] = self.user.username
+        data['email'] = self.user.email
+        data['first_name'] = self.user.first_name
+        data['last_name'] = self.user.last_name
+        return data
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPair

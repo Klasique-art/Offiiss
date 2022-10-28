@@ -96,7 +96,6 @@ class MyTokenObtainPair(TokenObtainPairSerializer):
         # serializer = UserSerializerWithToken(self.user).data
         # for k,v in serializer.items():
         # data[k] = v
-        
         data['username'] = self.user.username
         data['email'] = self.user.email
         data['first_name'] = self.user.first_name

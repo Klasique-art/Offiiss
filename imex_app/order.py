@@ -23,7 +23,7 @@ def check_code(request):
     pass
 
 @api_view(['POST'])
-    def done(request):
+def done(request):
     if request.method == 'POST':
         order_id = request.data.get('order_id')
         order = get_object_or_404(Order, pk=order_id)
@@ -32,8 +32,8 @@ def check_code(request):
         agent = get_object_or_404(User, pk=agent_id)
         order.code=generate(agent.username, client_name)
         order.save()
-#        this is where request will be sent by mail or sms
+    #        this is where request will be sent by mail or sms
         Order.is_done=True;order.code_active=True
         order.save()
-        return Response({"status": "Request sent")
+    return Response({"status": "Request sent"})
 

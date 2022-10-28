@@ -3,7 +3,7 @@ from django.urls import path, include
 from imex_app.views import MyTokenObtainPairView, agents,create_user,MyTokenObtainPair
 from imex_app.api import ReviewResource as rr
 from django.conf.urls.static import static
-#from django.conf import settings
+from django.conf import settings
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,

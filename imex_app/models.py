@@ -1,3 +1,4 @@
+from random import choices
 from django.db import models
 from tastypie.utils.timezone import now
 from django.contrib.auth.models import User
@@ -13,7 +14,6 @@ class AgentType(models.Model):
 
     def __str__(self):
         return self.type
-
 class Profile(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
@@ -28,6 +28,12 @@ class Profile(models.Model):
     company_location = models.CharField(max_length=200,null=True,blank=True)
     city = models.CharField(max_length=200,null = True,blank = True)
     region = models.CharField(max_length=200,null = True,blank = True)
+    AGENT_STATUS_CHOICES = (
+        (1, 'created'),
+        (2, 'pending'),
+        (3, 'verified'),
+    )
+    agent_status = models.PositiveSmallIntegerField(choices = AGENT_STATUS_CHOICES,default = 1)
     def __str__(self):
         return self.user.username
 

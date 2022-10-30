@@ -1,5 +1,5 @@
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
-from .models import Agent, Review
+# from .models import Agent, Review
 from tastypie import fields
 
 #class AgentResource(ModelResource):

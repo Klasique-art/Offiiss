@@ -38,13 +38,13 @@ class Profile(models.Model):
         return self.user.username
 
 class Review(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
-    name = models.CharField(max_length=200,null = True,blank = True)
+    agent = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
+    client = models.ForeignKey(User, on_delete=models.CASCADE, related_name='client',null = True,blank=True)
     date = models.DateTimeField(default=now)
     content = models.TextField(max_length = 250,null = True,blank = True)
     rating = models.DecimalField(max_digits = 2,decimal_places = 1,null = True,blank = True)
     def __str__(self):
-        return self.name
+        return str(self.date)
 
 class Order(models.Model):
     client_name = models.CharField(max_length=200)

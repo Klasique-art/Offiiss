@@ -90,6 +90,20 @@ def create_profile(request):
         agent_type = request.data.get("agent_type")
         Profile.objects.create(name=name, telephone_number=telephone_number, company=company, company_description=company_description, company_location=company_location, city=city, region=region, user_id=user_id, agent_type_id=agent_type, is_agent=True)
         return Response({"status": "Profile created"})
+@api_view(['GET','POST'])
+def agent_reviews(request):
+    if request.method == "POST":
+        agent = User.objects.get(id = request.data.get('agent_id'))
+        client = User.objects.get(id = request.data.get('client_id'))
+        content = request.data.get('content')
+        rating = request.data.get('rating')
+        Review.objects.create(agent = agent,client = client,content=content,rating=rating)
+        return Response({'status':'Review Created Successfully'})
+    else:
+        agent = User.objects.get(id = request.GET.get('agent_id'))
+        reviews = Review.objects.filter(agent = agent)
+        data = [{'agent_id':review.agent.id,'client_id':review.client.id,'client_name':f'{review.client.first_name} {review.client.last_name}','content':review.content,'rating':review.rating} for review in reviews]
+        return Response(data)
 
 class MyTokenObtainPair(TokenObtainPairSerializer):
     def validate(self, attrs):

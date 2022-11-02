@@ -11,7 +11,7 @@ from rest_framework_simplejwt.views import (
 # review = rr()
 
 urlpatterns = [
-path('create-user/', create_user, name='create_user'),
+ path('create-user/', create_user, name='create_user'),
 path('change_username/', change_username, name='change_username'),
 path('change_email/', change_email, name='change_email'),
 path('change_password/', change_password, name='change_password'),

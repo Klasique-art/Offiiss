@@ -68,15 +68,39 @@ def create_agent(request):
             return Response({'status': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 # api view to create agent
 
-@api_view(['POST'])
+@api_view(["POST"])
 def change_email(request):
-    pass
+    if request.method == "POST":
+        user_id = request.data.get("user_id")
+        email= request.data.get("email")
+        if User.objects.filter(email=email).exists():
+                return Response({'status': "User already exists"}, status=status.HTTP_409_CONFLICT)
+        user = get_object_or_404(User, pk=user_id)
+        user.email = email
+        user.save()
+        return Response({"status": "changed"})
 
 @api_view(['POST'])
 def change_password(request):
-    pass
+    if request.method == "POST":
+        user_id = request.data.get("user_id")
+        user = get_object_or_404(User, pk=user_id)
+        password = request.data.get("password")
+        user.password = make_password(password)
+        user.save()
+        return Response({"status": "changed"})
+
+@api_view(["POST"])
 def change_username(request):
-    pass
+    if request.method == "POST":
+        user_id = request.data.get("user_id")
+        user_name= request.data.get("username")
+        if User.objects.filter(username=user_name).exists():
+                return Response({'status': "User already exists"}, status=status.HTTP_409_CONFLICT)
+        user = get_object_or_404(User, pk=user_id)
+        user.username = user_name
+        user.save()
+        return Response({"status": "changed"})
 
 @api_view(["POST"])
 def create_profile(request):

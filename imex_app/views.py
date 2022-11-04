@@ -15,17 +15,17 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 def agents(request):
     if request.GET.get('agent_type'):
         agent_type = AgentType.objects.get(slug = request.GET.get('agent_type'))
-        agents = Profile.objects.filter(user_type = 2,agent_status = 3)
+        agents = Profile.objects.filter(user_type = 2,agent_status = 3,agent_type = agent_type)
         paginate_obj = Paginator(agents, 10)
         results = paginate_obj.get_page(int(request.GET.get("page", 1)))
-        data = [{"agent_id": agent.user_id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.user.reviews.aggregate(Sum('rating'))['rating__sum'],'num_reviews':agent.user.reviews.aggregate(Count('rating'))['rating__count'], "city": agent.city, "region": agent.region, "company_location": agent.company_location} for agent in results]
+        data = [{"agent_id": agent.user_id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.user.reviews.aggregate(Sum('rating'))['rating__sum'],'num_reviews':agent.user.reviews.aggregate(Count('rating'))['rating__count'], "city": agent.city, "region": agent.region, "company_location": agent.company_location,'image':agent.image.url} for agent in results]
         # data.append({"pagination_info": {"has_prev": results.has_previous(), "has_next": results.has_next(), "page_number": results.number,  "pages": paginate_obj.num_pages}})
         return Response({'objects':data,"pagination_info": {"has_prev": results.has_previous(), "has_next": results.has_next(), "page_number": results.number,  "pages": paginate_obj.num_pages}})
     else:
         agents = Profile.objects.filter(user_type = 2,agent_status = 3)[:request.GET.get('limit')]
         paginate_obj = Paginator(agents, 10)
         results = paginate_obj.get_page(int(request.GET.get("page", 1)))
-        data = [{"agent_id": agent.user_id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.user.reviews.aggregate(Sum('rating'))['rating__sum'],'num_reviews':agent.user.reviews.aggregate(Count('rating'))['rating__count'], "city": agent.city, "region": agent.region, "company_location": agent.company_location} for agent in results]
+        data = [{"agent_id": agent.user_id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.user.reviews.aggregate(Sum('rating'))['rating__sum'],'num_reviews':agent.user.reviews.aggregate(Count('rating'))['rating__count'], "city": agent.city, "region": agent.region, "company_location": agent.company_location,'image':agent.image.url} for agent in results]
         # data.append({"pagination_info": {"has_prev": results.has_previous(), "has_next": results.has_next(), "page_number": results.number,  "pages": paginate_obj.num_pages}})
 #            data = [{"agent_id": agent.id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.reviews.aggregate(Sum('rating'))['rating__sum'], "city": agent.city, "region": agent.region, "company_location": agent.company_location} for agent in agents]            
         return Response({'objects':data,"pagination_info": {"has_prev": results.has_previous(), "has_next": results.has_next(), "page_number": results.number,  "pages": paginate_obj.num_pages}})
@@ -117,7 +117,7 @@ def create_profile(request):
         Profile.objects.create(name=name, telephone_number=telephone_number, company=company, company_description=company_description, company_location=company_location, city=city, region=region, user_id=user_id, agent_type_id=agent_type, is_agent=True)
         return Response({"status": "Profile created"})
 @api_view(['GET','POST'])
-def agent_reviews(request):
+def reviews(request):
     if request.method == "POST":
         agent = User.objects.get(id = request.data.get('agent_id'))
         client = User.objects.get(id = request.data.get('client_id'))
@@ -128,7 +128,7 @@ def agent_reviews(request):
     else:
         agent = User.objects.get(id = request.GET.get('agent_id'))
         reviews = Review.objects.filter(agent = agent)
-        data = [{'agent_id':review.agent.id,'client_id':review.client.id,'client_name':f'{review.client.first_name} {review.client.last_name}','content':review.content,'rating':review.rating} for review in reviews]
+        data = [{'agent_id':review.agent.id,'client_id':review.client.id,'client_name':f'{review.client.first_name} {review.client.last_name}','content':review.content,'rating':review.rating,'date':review.date} for review in reviews]
         return Response(data)
 
 class MyTokenObtainPair(TokenObtainPairSerializer):

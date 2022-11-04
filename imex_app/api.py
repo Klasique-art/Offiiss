@@ -1,20 +1,29 @@
-from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
-# from .models import Agent, Review
-from tastypie import fields
+from .models import Profile
+from rest_framework import viewsets
+from .serializers import ImageSerializer, ProfileSerializer
+from rest_framework import permissions
+from rest_framework.parsers import MultiPartParser, FormParser
 
-#class AgentResource(ModelResource):
-#    class Meta:
-#        queryset = Agent.objects.all()
-#        resource_name = 'agent'
-#        filtering = {'id': ALL, 'name': ALL, 'telephone_number': ALL}
+class ProfileView(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    parser_classes = (MultiPartParser, FormParser)
+#    permission_classes = [
+#        permissions.IsAuthenticatedOrReadOnly]
 
-#class ReviewResource(ModelResource):
-#    agent = fields.ForeignKey(AgentResource, 'agent', full=True)
-#    class Meta:
-#        queryset = Review.objects.all()
-#        resource_name = 'review'
-#        allow_methods = ['GET', 'POST']
-#        authorization = Authorization()
-#        filtering = {'agent': ALL_WITH_RELATIONS, 'name': ALL, 'rating':ALL, 'content':ALL}
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+
+class ImageView(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    parser_classes = (MultiPartParser, FormParser)
+#    permission_classes = [
+#        permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 

@@ -9,8 +9,11 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 # review = rr()
+from imex_app.api import ProfileView, ImageView
 
 urlpatterns = [
+path('profile/<int:pk>/', ProfileView.as_view({"post": "update"}), name='profile'),
+path("image/<int:pk>/", ImageView.as_view({"post": "update"}), name="image"),
  path('create-user/', create_user, name='create_user'),
 path('change_username/', change_username, name='change_username'),
 path('change_email/', change_email, name='change_email'),

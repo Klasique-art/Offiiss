@@ -15,14 +15,14 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 def agents(request):
     if request.GET.get('agent_type'):
         agent_type = AgentType.objects.get(slug = request.GET.get('agent_type'))
-        agents = Profile.objects.filter(agent_type = agent_type, is_agent=True)
+        agents = Profile.objects.filter(user_type = 2,agent_status = 3)
         paginate_obj = Paginator(agents, 10)
         results = paginate_obj.get_page(int(request.GET.get("page", 1)))
         data = [{"agent_id": agent.user_id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.user.reviews.aggregate(Sum('rating'))['rating__sum'],'num_reviews':agent.user.reviews.aggregate(Count('rating'))['rating__count'], "city": agent.city, "region": agent.region, "company_location": agent.company_location} for agent in results]
         # data.append({"pagination_info": {"has_prev": results.has_previous(), "has_next": results.has_next(), "page_number": results.number,  "pages": paginate_obj.num_pages}})
         return Response({'objects':data,"pagination_info": {"has_prev": results.has_previous(), "has_next": results.has_next(), "page_number": results.number,  "pages": paginate_obj.num_pages}})
     else:
-        agents = Profile.objects.filter(is_agent=True)[:request.GET.get('limit')]
+        agents = Profile.objects.filter(user_type = 2,agent_status = 3)[:request.GET.get('limit')]
         paginate_obj = Paginator(agents, 10)
         results = paginate_obj.get_page(int(request.GET.get("page", 1)))
         data = [{"agent_id": agent.user_id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.user.reviews.aggregate(Sum('rating'))['rating__sum'],'num_reviews':agent.user.reviews.aggregate(Count('rating'))['rating__count'], "city": agent.city, "region": agent.region, "company_location": agent.company_location} for agent in results]
@@ -143,8 +143,8 @@ class MyTokenObtainPair(TokenObtainPairSerializer):
         data['first_name'] = self.user.first_name
         data['last_name'] = self.user.last_name
         data['name'] = user_profile.name
-        data['is_agent'] = user_profile.is_agent
-        data['agent_status'] = user_profile.agent_status
+        data['agent_status'] = user_profile.get_user_type_display()
+        data['agent_status'] = user_profile.get_agent_status_display()
         return data
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPair

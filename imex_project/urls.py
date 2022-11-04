@@ -14,7 +14,8 @@ from imex_app.api import ProfileView, ImageView
 urlpatterns = [
 path('profile/<int:pk>/', ProfileView.as_view({"post": "update"}), name='profile'),
 path("image/<int:pk>/", ImageView.as_view({"post": "update"}), name="image"),
- path('create-user/', create_user, name='create_user'),
+path('create-user/', create_user, name='create_user'),
+path('create-agent/', create_agent, name='create_agent'),
 path('change-username/', change_username, name='change_username'),
 path('change-email/', change_email, name='change_email'),
 path('change-password/', change_password, name='change_password'),

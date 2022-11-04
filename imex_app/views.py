@@ -43,7 +43,7 @@ def create_user(request):
                 return Response({'status': "User already exists"}, status=status.HTTP_409_CONFLICT)
             else:
                 user = User.objects.create(email=email, password=make_password(password), first_name=first_name, last_name=last_name, username=username)
-                Profile.objects.create(user=user)
+                Profile.objects.create(user=user,user_type = 1,name=user.first_name + ' ' + user.last_name)
                 return Response({"status": "Account created"})
         except Exception as e:
             return Response({'status': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -62,7 +62,7 @@ def create_agent(request):
                 return Response({'status': "User already exists"}, status=status.HTTP_409_CONFLICT)
             else:
                 user = User.objects.create(email=email, password=make_password(password), first_name=first_name, last_name=last_name, username=username, is_active=True)
-                Profile.objects.create(user=user, user_type=2)
+                Profile.objects.create(user=user, user_type=2,name=user.first_name + ' ' + user.last_name)
                 return Response({"status": "Account created"})
         except Exception as e:
             return Response({'status': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -138,6 +138,7 @@ class MyTokenObtainPair(TokenObtainPairSerializer):
         # for k,v in serializer.items():
         # data[k] = v
         user_profile = Profile.objects.get(user = self.user)
+        data['id'] = user_profile.id
         data['username'] = self.user.username
         data['email'] = self.user.email
         data['first_name'] = self.user.first_name

@@ -18,7 +18,7 @@ class Profile(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     telephone_number = models.CharField(max_length=15, null=True, blank=True)
-    image = models.ImageField(upload_to='profile', null=True, blank=True)
+    image = models.ImageField(upload_to='profile', null=True, blank=True,default = '/profile/profile1.jpeg')
     user_type = models.PositiveSmallIntegerField(choices=((1, 'client'), (2, 'agent')), default=1)
     license = models.ImageField(upload_to='license', null=True, blank=True)
     agent_type = models.ForeignKey(AgentType, on_delete=models.CASCADE, related_name='agents', null=True, blank=True)

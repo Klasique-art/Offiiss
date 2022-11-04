@@ -143,7 +143,8 @@ class MyTokenObtainPair(TokenObtainPairSerializer):
         data['first_name'] = self.user.first_name
         data['last_name'] = self.user.last_name
         data['name'] = user_profile.name
-        data['agent_status'] = user_profile.get_user_type_display()
+        data['user_type'] = user_profile.get_user_type_display()
+        data['image'] = user_profile.image.url
         data['agent_status'] = user_profile.get_agent_status_display()
         return data
 class MyTokenObtainPairView(TokenObtainPairView):

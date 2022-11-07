@@ -26,6 +26,7 @@ def agents(request):
         paginate_obj = Paginator(agents, 10)
         results = paginate_obj.get_page(int(request.GET.get("page", 1)))
         data = [{"agent_id": agent.user_id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.user.reviews.aggregate(Sum('rating'))['rating__sum'],'num_reviews':agent.user.reviews.aggregate(Count('rating'))['rating__count'], "city": agent.city, "region": agent.region, "company_location": agent.company_location,'image':agent.image.url} for agent in results]
+        
         # data.append({"pagination_info": {"has_prev": results.has_previous(), "has_next": results.has_next(), "page_number": results.number,  "pages": paginate_obj.num_pages}})
 #            data = [{"agent_id": agent.id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.reviews.aggregate(Sum('rating'))['rating__sum'], "city": agent.city, "region": agent.region, "company_location": agent.company_location} for agent in agents]            
         return Response({'objects':data,"pagination_info": {"has_prev": results.has_previous(), "has_next": results.has_next(), "page_number": results.number,  "pages": paginate_obj.num_pages}})
@@ -44,7 +45,7 @@ def create_user(request):
             else:
                 user = User.objects.create(email=email, password=make_password(password), first_name=first_name, last_name=last_name, username=username)
                 Profile.objects.create(user=user,user_type = 1,name=user.first_name + ' ' + user.last_name)
-                return Response({"status": "Account created"})
+                return Response({"status": "Account created",})
         except Exception as e:
             return Response({'status': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 # api view to create a client
@@ -62,8 +63,8 @@ def create_agent(request):
                 return Response({'status': "User already exists"}, status=status.HTTP_409_CONFLICT)
             else:
                 user = User.objects.create(email=email, password=make_password(password), first_name=first_name, last_name=last_name, username=username, is_active=True)
-                Profile.objects.create(user=user, user_type=2,name=user.first_name + ' ' + user.last_name)
-                return Response({"status": "Account created"})
+                user_profile = Profile.objects.create(user=user, user_type=2,name=user.first_name + ' ' + user.last_name)
+                return Response({"status": "Account created","profile_id":user_profile.id})
         except Exception as e:
             return Response({'status': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 # api view to create agent

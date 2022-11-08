@@ -10,22 +10,25 @@ from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-
 @api_view(['GET'])
 def agents(request):
     if request.GET.get('agent_type'):
-        agent_type = AgentType.objects.get(slug = request.GET.get('agent_type'))
-        agents = Profile.objects.filter(user_type = 2,agent_status = 3,agent_type = agent_type)
+        # agent_type = AgentType.objects.get(slug = request.GET.get('agent_type'))
+        agent_type = request.GET.get('agent_type')
+        if agent_type == 'sea-port':
+            agents = Profile.objects.filter(user_type = 2,agent_status = 3,is_sea_port = True)
+        else:
+            agents = Profile.objects.filter(user_type = 2,agent_status = 3,is_air_port = True)
         paginate_obj = Paginator(agents, 10)
         results = paginate_obj.get_page(int(request.GET.get("page", 1)))
-        data = [{"agent_id": agent.user_id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.user.reviews.aggregate(Sum('rating'))['rating__sum']/agent.user.reviews.aggregate(Count('rating'))['rating__count'],'num_reviews':agent.user.reviews.aggregate(Count('rating'))['rating__count'], "city": agent.city, "region": agent.region, "company_location": agent.company_location,'image':agent.image.url} for agent in results]
+        data = [{"agent_id": agent.user_id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.user.reviews.aggregate(Sum('rating'))['rating__sum']/agent.user.reviews.aggregate(Count('rating'))['rating__count'],'num_reviews':agent.user.reviews.aggregate(Count('rating'))['rating__count'], "city": agent.city, "region": agent.region, "company_location": agent.company_location,'image':agent.image.url,'is_air_port':agent.is_air_port,'is_sea_port':agent.is_sea_port} for agent in results]
         # data.append({"pagination_info": {"has_prev": results.has_previous(), "has_next": results.has_next(), "page_number": results.number,  "pages": paginate_obj.num_pages}})
         return Response({'objects':data,"pagination_info": {"has_prev": results.has_previous(), "has_next": results.has_next(), "page_number": results.number,  "pages": paginate_obj.num_pages}})
     else:
         agents = Profile.objects.filter(user_type = 2,agent_status = 3)[:request.GET.get('limit')]
         paginate_obj = Paginator(agents, 10)
         results = paginate_obj.get_page(int(request.GET.get("page", 1)))
-        data = [{"agent_id": agent.user_id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.user.reviews.aggregate(Sum('rating'))['rating__sum']/agent.user.reviews.aggregate(Count('rating'))['rating__count'],'num_reviews':agent.user.reviews.aggregate(Count('rating'))['rating__count'], "city": agent.city, "region": agent.region, "company_location": agent.company_location,'image':agent.image.url} for agent in results]
+        data = [{"agent_id": agent.user_id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.user.reviews.aggregate(Sum('rating'))['rating__sum']/agent.user.reviews.aggregate(Count('rating'))['rating__count'],'num_reviews':agent.user.reviews.aggregate(Count('rating'))['rating__count'], "city": agent.city, "region": agent.region, "company_location": agent.company_location,'image':agent.image.url,'is_air_port':agent.is_air_port,'is_sea_port':agent.is_sea_port} for agent in results]
 
         # data.append({"pagination_info": {"has_prev": results.has_previous(), "has_next": results.has_next(), "page_number": results.number,  "pages": paginate_obj.num_pages}})
 #            data = [{"agent_id": agent.id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.reviews.aggregate(Sum('rating'))['rating__sum'], "city": agent.city, "region": agent.region, "company_location": agent.company_location} for agent in agents]            

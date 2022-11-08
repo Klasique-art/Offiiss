@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.utils.timezone import now
 
 # Create your models here.class AgentType(models.Model):
-
 class AgentType(models.Model):
     slug = models.SlugField(max_length = 205,null =
      True,blank = True)
@@ -27,6 +26,8 @@ class Profile(models.Model):
     company_location = models.CharField(max_length=200,null=True,blank=True)
     city = models.CharField(max_length=200,null = True,blank = True)
     region = models.CharField(max_length=200,null = True,blank = True)
+    is_sea_port = models.BooleanField(default = False)
+    is_air_port = models.BooleanField(default = False)
     AGENT_STATUS_CHOICES = (
         (1, 'created'),
         (2, 'pending'),

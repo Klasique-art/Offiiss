@@ -140,3 +140,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend',
 'imex_app.email_auth_middleware.EmailBackend']
 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'eritten2@gmail.com'
+EMAIL_HOST_PASSWORD = 'GyauErittenKwame12345'
+EMAIL_USE_SSL = True

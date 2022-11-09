@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 import secrets as ss
 from rest_framework.response import Response
 from rest_framework import status
+from django.core.mail import send_mail
 
 def generate(x, y):
     gen = ss.SystemRandom()
@@ -20,20 +21,25 @@ def order(request):
 
 @api_view(['POST'])
 def check_code(request):
-    pass
+    order_id = request.data.get('order_id')
+    order = get_object_or_404(Order, pk=order_id)
+    if order.is_done and order.is_active:
+        return Response({"status": "can review"}, status=status.HTTP_100_CONTINUE)
+    return Response({"status": cannot review"}, status=status.HTTP_103_EARLY_HINTS)
 
 @api_view(['POST'])
 def done(request):
     if request.method == 'POST':
         order_id = request.data.get('order_id')
         order = get_object_or_404(Order, pk=order_id)
-        client_number = request.data.get('client_number')
+        client_name = request.data.get('client_name')
         agent_id = request.data.get('agent_id')
-        agent = get_object_or_404(User, pk=agent_id)
+        client = get_object_or_404(User, username=client_name)
         order.code=generate(agent.username, client_name)
         order.save()
     #        this is where request will be sent by mail or sms
-        Order.is_done=True;order.code_active=True
+        send_mail('Offiis review request', f'Please use the below code to review {agent.username}. \r' + str(order.code), [client.email], fail_silently=True)
+        order.is_done=True;order.code_active=True
         order.save()
     return Response({"status": "Request sent"})
 

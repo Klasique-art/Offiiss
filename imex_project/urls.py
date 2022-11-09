@@ -10,6 +10,7 @@ from rest_framework_simplejwt.views import (
 )
 # review = rr()
 from imex_app.api import ProfileView, ImageView
+from imex_app.order import check_code, order, done
 
 urlpatterns = [
 path('profile/<int:pk>/', ProfileView.as_view({"post": "update"}), name='profile'),
@@ -24,7 +25,10 @@ path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 # path('api/', include(review.urls)),
 path('agents/', agents, name='agents'),
 path('admin/', admin.site.urls),
-path('reviews/',reviews,name = 'reviews' )
+path('reviews/',reviews,name = 'reviews' ),
+path('check-code/', check_code, name='check_code'),
+path('completed/', done, name='done'),
+path('order/', order, name='order'),
 ]
 urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

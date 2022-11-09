@@ -27,6 +27,7 @@ class Profile(models.Model):
     city = models.CharField(max_length=200,null = True,blank = True)
     region = models.CharField(max_length=200,null = True,blank = True)
     is_sea_port = models.BooleanField(default = False)
+    ghana_card = models.CharField(max_length=100)
     is_air_port = models.BooleanField(default = False)
     AGENT_STATUS_CHOICES = (
         (1, 'created'),

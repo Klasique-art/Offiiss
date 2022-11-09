@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from imex_app.views import MyTokenObtainPairView, agents,create_user,MyTokenObtainPair,reviews, create_agent, change_password, change_email, change_username
+from imex_app.views import MyTokenObtainPairView, agents,create_user,MyTokenObtainPair,reviews, create_agent, change_password, change_email, change_username, orders
 # from imex_app.api import ReviewResource as rr
 from django.conf.urls.static import static
 from django.conf import settings
@@ -28,6 +28,7 @@ path('admin/', admin.site.urls),
 path('reviews/',reviews,name = 'reviews' ),
 path('check-code/', check_code, name='check_code'),
 path('completed/', done, name='done'),
+path("fetch-orders/", orders, name='orders'),
 path('order/', order, name='order'),
 ]
 urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

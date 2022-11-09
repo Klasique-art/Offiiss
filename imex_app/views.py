@@ -10,22 +10,26 @@ from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-
 @api_view(['GET'])
 def agents(request):
     if request.GET.get('agent_type'):
-        agent_type = AgentType.objects.get(slug = request.GET.get('agent_type'))
-        agents = Profile.objects.filter(agent_type = agent_type, is_agent=True)
+        # agent_type = AgentType.objects.get(slug = request.GET.get('agent_type'))
+        agent_type = request.GET.get('agent_type')
+        if agent_type == 'sea-port':
+            agents = Profile.objects.filter(user_type = 2,agent_status = 3,is_sea_port = True)
+        else:
+            agents = Profile.objects.filter(user_type = 2,agent_status = 3,is_air_port = True)
         paginate_obj = Paginator(agents, 10)
         results = paginate_obj.get_page(int(request.GET.get("page", 1)))
-        data = [{"agent_id": agent.user_id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.user.reviews.aggregate(Sum('rating'))['rating__sum'],'num_reviews':agent.user.reviews.aggregate(Count('rating'))['rating__count'], "city": agent.city, "region": agent.region, "company_location": agent.company_location} for agent in results]
+        data = [{"agent_id": agent.user_id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.user.reviews.aggregate(Sum('rating'))['rating__sum']/agent.user.reviews.aggregate(Count('rating'))['rating__count'],'num_reviews':agent.user.reviews.aggregate(Count('rating'))['rating__count'], "city": agent.city, "region": agent.region, "company_location": agent.company_location,'image':agent.image.url,'is_air_port':agent.is_air_port,'is_sea_port':agent.is_sea_port} for agent in results]
         # data.append({"pagination_info": {"has_prev": results.has_previous(), "has_next": results.has_next(), "page_number": results.number,  "pages": paginate_obj.num_pages}})
         return Response({'objects':data,"pagination_info": {"has_prev": results.has_previous(), "has_next": results.has_next(), "page_number": results.number,  "pages": paginate_obj.num_pages}})
     else:
-        agents = Profile.objects.filter(is_agent=True)[:request.GET.get('limit')]
+        agents = Profile.objects.filter(user_type = 2,agent_status = 3)[:request.GET.get('limit')]
         paginate_obj = Paginator(agents, 10)
         results = paginate_obj.get_page(int(request.GET.get("page", 1)))
-        data = [{"agent_id": agent.user_id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.user.reviews.aggregate(Sum('rating'))['rating__sum'],'num_reviews':agent.user.reviews.aggregate(Count('rating'))['rating__count'], "city": agent.city, "region": agent.region, "company_location": agent.company_location} for agent in results]
+        data = [{"agent_id": agent.user_id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.user.reviews.aggregate(Sum('rating'))['rating__sum']/agent.user.reviews.aggregate(Count('rating'))['rating__count'],'num_reviews':agent.user.reviews.aggregate(Count('rating'))['rating__count'], "city": agent.city, "region": agent.region, "company_location": agent.company_location,'image':agent.image.url,'is_air_port':agent.is_air_port,'is_sea_port':agent.is_sea_port} for agent in results]
+
         # data.append({"pagination_info": {"has_prev": results.has_previous(), "has_next": results.has_next(), "page_number": results.number,  "pages": paginate_obj.num_pages}})
 #            data = [{"agent_id": agent.id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.reviews.aggregate(Sum('rating'))['rating__sum'], "city": agent.city, "region": agent.region, "company_location": agent.company_location} for agent in agents]            
         return Response({'objects':data,"pagination_info": {"has_prev": results.has_previous(), "has_next": results.has_next(), "page_number": results.number,  "pages": paginate_obj.num_pages}})
@@ -43,8 +47,8 @@ def create_user(request):
                 return Response({'status': "User already exists"}, status=status.HTTP_409_CONFLICT)
             else:
                 user = User.objects.create(email=email, password=make_password(password), first_name=first_name, last_name=last_name, username=username)
-                Profile.objects.create(user=user)
-                return Response({"status": "Account created"})
+                Profile.objects.create(user=user,user_type = 1,name=user.first_name + ' ' + user.last_name)
+                return Response({"status": "Account created",})
         except Exception as e:
             return Response({'status': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 # api view to create a client
@@ -62,8 +66,8 @@ def create_agent(request):
                 return Response({'status': "User already exists"}, status=status.HTTP_409_CONFLICT)
             else:
                 user = User.objects.create(email=email, password=make_password(password), first_name=first_name, last_name=last_name, username=username, is_active=True)
-                Profile.objects.create(user=user, user_type=2)
-                return Response({"status": "Account created"})
+                user_profile = Profile.objects.create(user=user, user_type=2,name=user.first_name + ' ' + user.last_name)
+                return Response({"status": "Account created","profile_id":user_profile.id})
         except Exception as e:
             return Response({'status': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 # api view to create agent
@@ -117,7 +121,7 @@ def create_profile(request):
         Profile.objects.create(name=name, telephone_number=telephone_number, company=company, company_description=company_description, company_location=company_location, city=city, region=region, user_id=user_id, agent_type_id=agent_type, is_agent=True)
         return Response({"status": "Profile created"})
 @api_view(['GET','POST'])
-def agent_reviews(request):
+def reviews(request):
     if request.method == "POST":
         agent = User.objects.get(id = request.data.get('agent_id'))
         client = User.objects.get(id = request.data.get('client_id'))
@@ -128,7 +132,7 @@ def agent_reviews(request):
     else:
         agent = User.objects.get(id = request.GET.get('agent_id'))
         reviews = Review.objects.filter(agent = agent)
-        data = [{'agent_id':review.agent.id,'client_id':review.client.id,'client_name':f'{review.client.first_name} {review.client.last_name}','content':review.content,'rating':review.rating} for review in reviews]
+        data = [{'agent_id':review.agent.id,'client_id':review.client.id,'client_name':f'{review.client.first_name} {review.client.last_name}','content':review.content,'rating':review.rating,'date':review.date} for review in reviews]
         return Response(data)
 
 class MyTokenObtainPair(TokenObtainPairSerializer):
@@ -138,13 +142,15 @@ class MyTokenObtainPair(TokenObtainPairSerializer):
         # for k,v in serializer.items():
         # data[k] = v
         user_profile = Profile.objects.get(user = self.user)
+        data['id'] = user_profile.id
         data['username'] = self.user.username
         data['email'] = self.user.email
         data['first_name'] = self.user.first_name
         data['last_name'] = self.user.last_name
         data['name'] = user_profile.name
-        data['is_agent'] = user_profile.is_agent
-        data['agent_status'] = user_profile.agent_status
+        data['user_type'] = user_profile.get_user_type_display()
+        data['image'] = user_profile.image.url
+        data['agent_status'] = user_profile.get_agent_status_display()
         return data
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPair

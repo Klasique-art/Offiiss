@@ -134,6 +134,15 @@ def reviews(request):
         reviews = Review.objects.filter(agent = agent)
         data = [{'agent_id':review.agent.id,'client_id':review.client.id,'client_name':f'{review.client.first_name} {review.client.last_name}','content':review.content,'rating':review.rating,'date':review.date} for review in reviews]
         return Response(data)
+from .models import Order
+
+@api_view(["GET"])
+def orders(request):
+    agent_id = request.GET.get("agent_id")
+    order = Order.objects.filter(user__pk=agent_id, is_done=False).all()
+    data = [{"client_name": o.client_name, 'client_telephone_number': o.telephone} for o in order]
+    return Response(data)
+
 
 class MyTokenObtainPair(TokenObtainPairSerializer):
     def validate(self, attrs):

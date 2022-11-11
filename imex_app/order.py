@@ -5,6 +5,7 @@ import secrets as ss
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.mail import send_mail
+from rest_framework.decorators import api_view
 
 def generate(x, y):
     gen = ss.SystemRandom()
@@ -14,18 +15,21 @@ def generate(x, y):
 @api_view(['POST'])
 def order(request):
     if request.method == 'POST':
-        client_name = request.data.get()
+        client_id = request.data.get("client_id")
         agent_id = request.data.get('agent_id')
-        Order.objects.create(client_name=client_name, agent_id=agent_id)
+        Order.objects.create(client_id=client_id, agent_id=agent_id)
         return Response({'status': 'ordered'})
 
 @api_view(['POST'])
 def check_code(request):
     order_id = request.data.get('order_id')
+    code = request.data.get("code")
     order = get_object_or_404(Order, pk=order_id)
-    if order.is_done and order.is_active:
-        return Response({"status": "can review"}, status=status.HTTP_100_CONTINUE)
-    return Response({"status": cannot review"}, status=status.HTTP_103_EARLY_HINTS)
+    if Order.objects.filter(code=code).exists():
+        if order.is_done and order.is_active:
+            return Response({"status": "can review"}, status=status.HTTP_100_CONTINUE)
+        return Response({"status": "cannot review"}, status=status.HTTP_103_EARLY_HINTS)
+    return Response({"status": "The code does not exist"}, status=status.HTTP_451_UNAVAILABLE_FOR_LEGAL_REASONS)
 
 @api_view(['POST'])
 def done(request):

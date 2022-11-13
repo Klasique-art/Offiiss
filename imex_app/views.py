@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Profile, Review, AgentType
+from .models import Profile, Review, AgentType,Order
 from django.db.models import Count, Avg, Max, Q, Sum
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
@@ -134,13 +134,15 @@ def reviews(request):
         reviews = Review.objects.filter(agent = agent)
         data = [{'agent_id':review.agent.id,'client_id':review.client.id,'client_name':f'{review.client.first_name} {review.client.last_name}','content':review.content,'rating':review.rating,'date':review.date} for review in reviews]
         return Response(data)
-from .models import Order
+
 
 @api_view(["GET"])
 def orders(request):
+    # There is no field called user in order field and no telephone in user field
     agent_id = request.GET.get("agent_id")
-    order = Order.objects.filter(user__pk=agent_id, is_done=False).all()
-    data = [{"client_name": o.client_name, 'client_telephone_number': o.telephone} for o in order]
+    
+    orders = Order.objects.filter(agent__pk=agent_id, is_done=False).all()
+    data = [{"id":order.id,"client_name": f"{order.client.first_name} {order.client.last_name}", } for order in orders]
     return Response(data)
 
 

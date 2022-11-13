@@ -57,5 +57,6 @@ class Order(models.Model):
     class Meta:
         ordering = ['date']
     def __str__(self):
-        return self.client_name + ' working with ' + user.username + 'as an agent'
+        # there is no such field as client_name or user in this model please take note
+        return self.client.first_name + ' working with ' + self.agent.username + ' as an agent'
 

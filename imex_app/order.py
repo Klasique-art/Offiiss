@@ -22,9 +22,13 @@ def order(request):
 
 @api_view(['POST'])
 def check_code(request):
-    order_id = request.data.get('order_id')
+    # Again instead of sending both code and order_id, we are sending only the code
+    # the code is going to be used to query the order to ensure simplicity
     code = request.data.get("code")
-    order = get_object_or_404(Order, pk=order_id)
+    order = get_object_or_404(Order, code=code)
+    print(code)
+    print(order)
+    # We may not need this check if we are already able to query the order using the code
     if Order.objects.filter(code=code).exists():
         if order.is_done and order.is_active:
             return Response({"status": "can review"}, status=status.HTTP_100_CONTINUE)
@@ -34,15 +38,16 @@ def check_code(request):
 @api_view(['POST'])
 def done(request):
     if request.method == 'POST':
+        # Instead of sending client name from frontend, we will send only order id
+        # with the order id we can get client and agent(all details about the order)
+        # This ensures simplisity and avoids redundancy
+        #Also notice that there is no name field in user table
         order_id = request.data.get('order_id')
         order = get_object_or_404(Order, pk=order_id)
-        client_name = request.data.get('client_name')
-        agent_id = request.data.get('agent_id')
-        client = get_object_or_404(User, username=client_name)
-        order.code=generate(agent.username, client_name)
+        order.code=generate(order.agent.username, order.client.username)
         order.save()
     #        this is where request will be sent by mail or sms
-        send_mail('Offiis review request', f'Please use the below code to review {agent.username}. \r' + str(order.code), [client.email], fail_silently=True)
+        send_mail('Offiis review request', f'Please use the below code to review {order.agent.username}. \r' + str(order.code), [order.client.email], fail_silently=True)
         order.is_done=True;order.code_active=True
         order.save()
     return Response({"status": "Request sent"})

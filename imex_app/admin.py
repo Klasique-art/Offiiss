@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Review, AgentType
+from .models import Profile, Review, AgentType,Order
 from django.db.models import Avg
 
 # Register your models here.
@@ -27,3 +27,8 @@ class AgentTypeAdmin(admin.ModelAdmin):
     model = AgentType
     list_display = ['id','type', 'type_image']
 admin.site.register(AgentType, AgentTypeAdmin)
+
+class OrderAdmin(admin.ModelAdmin):
+    model = Order
+    list_display = ['id','agent_id','client_id','code','is_done','code_active']
+admin.site.register(Order,OrderAdmin)

@@ -139,10 +139,10 @@ def reviews(request):
 @api_view(["GET"])
 def orders(request):
     # There is no field called user in order field and no telephone in user field
-    agent_id = request.GET.get("agent_id")
-    
+    agent_id = request.GET.get("agent_id")    
     orders = Order.objects.filter(agent__pk=agent_id, is_done=False).all()
-    data = [{"id":order.id,"client_name": f"{order.client.first_name} {order.client.last_name}", } for order in orders]
+# there should be date
+    data = [{"id":order.id,"client_name": f"{order.client.first_name} {order.client.last_name}", "date": order.date} for order in orders]
     return Response(data)
 
 

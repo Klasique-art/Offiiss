@@ -17,6 +17,11 @@ def order(request):
     if request.method == 'POST':
         client_id = request.data.get("client_id")
         agent_id = request.data.get('agent_id')
+        client = get_object_or_404(User, pk=client_id)
+        agent = get_object_or_404(User, pk=agent_id)
+        order_name = client.username + ' ' + agent.username
+        if Order.objects.filter(order_name=order_name).exists():
+            return Response({"status": "Already exists"}, status=status.HTTP_451_UNAVAILABLE_FOR_LEGAL_REASONS)
         Order.objects.create(client_id=client_id, agent_id=agent_id)
         return Response({'status': 'ordered'})
 

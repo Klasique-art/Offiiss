@@ -48,6 +48,7 @@ class Review(models.Model):
         return str(self.date)
 
 class Order(models.Model):
+    order_name = models.CharField(max_length=100)
     client = models.ForeignKey(User, on_delete=models.CASCADE, related_name='client_orders')
     agent = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
     date = models.DateTimeField(default=now)

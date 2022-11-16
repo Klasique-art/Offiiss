@@ -22,7 +22,7 @@ def order(request):
         order_name = client.username + ' ' + agent.username
         if Order.objects.filter(order_name=order_name).exists():
             return Response({"status": "Already exists"}, status=status.HTTP_451_UNAVAILABLE_FOR_LEGAL_REASONS)
-        Order.objects.create(client_id=client_id, agent_id=agent_id)
+        Order.objects.create(order_name=order_name, client_id=client_id, agent_id=agent_id)
         return Response({'status': 'ordered'})
 
 @api_view(['POST'])

@@ -1,0 +1,100 @@
+:root {
+    --white: #fff;
+    --black: black;
+    --gray: gray;
+    --royalBlue: royalblue;
+    --deepBlue: #1300E9;
+    --lightBlue: #615ef8;
+    --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
+    --max-width: 1200px;
+    --clip-path-close: polygon(0 0, 100% 0, 100% 0, 0 0);
+    --clip-path-open: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    font-size: 62.5%;
+}
+*,::before,::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+::-webkit-scrollbar {
+    width: 1rem;
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--deepBlue);
+    border-radius: 100vw;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--lightBlue);
+}
+ul {
+    padding: 0;
+    list-style: none;
+}
+button,
+input,
+textarea {
+    outline: none;
+    border: none;
+}
+button,
+input[type="submit"] {
+    cursor: pointer;
+}
+a:hover,a {
+    text-decoration: none;
+}
+section,header,footer {
+    width: 100%;
+    padding: 5rem 2rem;
+}
+@media (max-width: 768px) {
+    nav,section,footer {
+        padding: 2rem 1rem;
+    }
+}
+.nav-wrapper,
+.header-wrapper,
+.section-wrapper,
+.footer-wrapper {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+.all-btns {
+    padding: 1rem 2rem;
+    border-radius: 6px;
+    background-color: var(--deepBlue);
+    font-weight: bold;
+    color: var(--white);
+    transition: .4s;
+    -ms-transition: .4s;
+    -webkit-transition: .4s;
+    -o-transition: .4s;
+    -moz-transition: .4s;
+}
+.all-btns:hover,
+.all-btns:focus {
+    background-color: var(--lightBlue);
+}
+img {
+    max-width: 100%;
+}
+textarea {
+    resize: none;
+}
+body {
+    overflow-x: hidden;
+    font-family: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", "Segoe UI Symbol", sans-serif;
+    font-size: 1.8rem;
+    /* background-color: var(--white); */
+    background-color: red;
+    transition: .4s;
+    -ms-transition: .4s;
+    -webkit-transition: .4s;
+    -o-transition: .4s;
+    -moz-transition: .4s;
+}

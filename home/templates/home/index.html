@@ -2,9 +2,46 @@
 {% load static %}
 {% block content %}
 {% if msg %}
-<h1>Welcome back</h1>
+<div class="wel-notice">
+    <h1>Welcome back</h1>
+</div>
 {% else %}
-<h1>This is your first visit</h1>
+<div class="wel-notice">
+    <h1>This is your first visit</h1>
+</div>
 {% endif %}
-body
+ <!-- header content -->
+ <header>
+    <div class="header-content">
+        <div class="offet-border">
+            <div class="welcome-msg-box">
+                <h1 class="wel-msg">Offiis export / import</h1>
+                <p class="wel-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur rem deleniti, placeat laudantium totam, dolores at recusandae vitae consequatur inventore accusamus facilis nostrum enim vel dolorum! Accusamus corrupti ex ipsum!</p>
+                <h2>download app now</h2>
+                <div class="download-wrapper">
+                    <a href="#n" class="google-play-box">
+                        <i class="fab fa-google-play icon"></i>
+                        <div class="content-box">
+                            <p>get it on</p>
+                            <h4>google Play</h4>
+                        </div>
+                    </a>
+                    <a href="#n" class="app-store-box">
+                        <i class="fab fa-apple icon"></i>
+                        <div class="content-box">
+                            <p>get it on</p>
+                            <h4>app store</h4>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="img-box">
+            <img src="{% static 'img/header-img.jpg' %}" alt="image of mobile phone with offiis app opened">
+        </div>
+    </div>
+    
+</header>
+<!-- end of header content -->
 {% endblock %}

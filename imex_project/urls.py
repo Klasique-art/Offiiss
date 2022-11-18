@@ -8,13 +8,15 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-from home.views import home_page
+from home.views import home_page, terms, privacy
 # review = rr()
 from imex_app.api import ProfileView, ImageView
 from imex_app.order import check_code, order, done
 
 urlpatterns = [
 path('', home_page, name='home'),
+path('privacy/', privacy, name='privacy'),
+path('terms/', terms, name='terms'),
 path('profile/<int:pk>/', ProfileView.as_view({"post": "update"}), name='profile'),
 path("image/<int:pk>/", ImageView.as_view({"post": "update"}), name="image"),
 path('create-user/', create_user, name='create_user'),

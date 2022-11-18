@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, redirect, get_object_or_404
 from . models import Blog, Like, Comment, Subscription
 from rest_framework.response import Response
@@ -8,6 +7,19 @@ from django.core.paginator import Paginator, PageNotAnInteger
 from django.db.models import Count, Q
 from django.contrib import messages
 from django.core.paginator import Paginator
+
+def home_page(request):
+    tags = Tag.objects.all()
+    visit = None
+    recent = Blog.objects.all()[:7]
+    if request.session.get('visit'):
+        visit = True
+        request.session['visit'] = int(request.session.get('visit') + 1)
+    else:
+        request.session['visit'] = 1
+        visit = False
+    return render(request, 'home/index.html', {'recent': recent, 'tags':tags, 'visit': visit})
+
 
 def detail(request, pk, slug):
     post = get_object_or_404(Blog, pk=pk, slug=slug)

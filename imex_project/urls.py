@@ -2,7 +2,9 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from home.views import home_page, terms, privacy
+from home.views import terms, privacy
+from home.blog_views import home_page
+
 
 urlpatterns = [
 path('', home_page, name='home'),

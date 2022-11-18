@@ -46,3 +46,12 @@ class Subscription(models.Model):
     email = models.EmailField()
     def __str__(self):
         return self.name
+
+class FeedBack(models.Model):
+    name = models.CharField(max_length=200)
+    date = models.DateTimeField(default=now)
+    content = models.TextField()
+    def __str__(self):
+        return self.name
+    class Meta:
+        ordering = ['-date']

@@ -2,11 +2,11 @@
 {% load static %}
 {% block content %}
 {% if msg %}
-<div class="wel-notice">
+<div class="wel-notice" role="alert">
     <h1>Welcome back</h1>
 </div>
 {% else %}
-<div class="wel-notice">
+<div class="wel-notice" role="alert">
     <h1>This is your first visit</h1>
 </div>
 {% endif %}
@@ -44,4 +44,87 @@
     
 </header>
 <!-- end of header content -->
+<!-- about section  -->
+<section id="about">
+    <div class="section-wrapper">
+        <div class="about-head">
+            <h3>about our app</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque explicabo repudiandae culpa deserunt velit molestiae non ea quod ad? Necessitatibus sit corporis commodi harum amet consequatur, blanditiis exercitationem sed. Rerum.</p>
+        </div>
+        <div class="about-content-box">
+            <div class="img-box">
+                <img src="{% static 'img/about-img.jpg' %}" alt="">
+            </div>
+            <div class="about-wrapper">
+                <!-- start -->
+                <div class="about-box">
+                    <i class="fas fa-check-circle icon"></i>
+                    <div class="text-box">
+                        <h4>access clearing agent</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod recusandae, officia nostrum at quos blanditiis non. Assumenda doloribus aut veniam excepturi velit ab, eaque rem soluta minus dignissimos voluptatem maiores?</p>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="about-box">
+                    <i class="fas fa-check-circle icon"></i>
+                    <div class="text-box">
+                        <h4>review your agent</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod recusandae, officia nostrum at quos blanditiis non. Assumenda doloribus aut veniam excepturi velit ab, eaque rem soluta minus dignissimos voluptatem maiores?</p>
+                    </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="about-box">
+                    <i class="fas fa-check-circle icon"></i>
+                    <div class="text-box">
+                        <h4>best user experience</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod recusandae, officia nostrum at quos blanditiis non. Assumenda doloribus aut veniam excepturi velit ab, eaque rem soluta minus dignissimos voluptatem maiores?</p>
+                    </div>
+                </div>
+                <!-- end -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end of about section  -->
+<!-- app features -->
+<section id="features">
+    <div class="section-wrapper">
+        <div class="feat-head">
+            <h3>app features</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque explicabo repudiandae culpa deserunt velit molestiae non ea quod ad? Necessitatibus sit corporis commodi harum amet consequatur, blanditiis exercitationem sed. Rerum.</p>
+        </div>
+        <div class="feat-wrapper">
+            <div class="detail-wrapper">
+                <div class="detail-box">
+                    <i class="fas fa-box-open"></i>
+                    <h4>unlimited features</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, quae!</p>
+                </div>
+                <div class="detail-box">
+                    <i class="fas fa-drafting-compass"></i>
+                    <h4>unlimited features</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, quae!</p>
+                </div>
+            </div>
+            <div class="img-box">
+                <img src="{% static 'img/features.jpg' %}" alt="">
+            </div>
+            <div class="detail-wrapper">
+                <div class="detail-box">
+                    <i class="fas fa-mobile-alt icon"></i>
+                    <h4>unlimited features</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, quae!</p>
+                </div>
+                <div class="detail-box">
+                    <i class="fas fa-user-tie icon"></i>
+                    <h4>24/7 support by real people</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, quae!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end of app features -->
 {% endblock %}

@@ -8,6 +8,15 @@ from django.db.models import Count, Q
 from django.contrib import messages
 from django.core.paginator import Paginator
 
+@api_view(["POST"])
+def letter(request):
+    if request.method == "POST":
+        email = request.data.get("email")
+        if Subscription.objects.filter(email=email).exists():
+            return Response({"message": "The email already exist"})
+        Subscription.objects.create(email=email)
+        return Response({"message": "You have successfully subscribed to our news letter"})
+
 def home_page(request):
     tags = Tag.objects.all()
     visit = None

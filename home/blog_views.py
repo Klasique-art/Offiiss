@@ -12,11 +12,11 @@ def home_page(request):
     tags = Tag.objects.all()
     visit = None
     recent = Blog.objects.all()[:7]
-    if request.session.get('visit'):
+    if request.session.get('visitors'):
         visit = True
-        request.session['visit'] = int(request.session.get('visit') + 1)
+        request.session['visitors'] = int(request.session.get('visitors') + 1)
     else:
-        request.session['visit'] = 1
+        request.session['visitors'] = 1
         visit = False
     return render(request, 'home/index.html', {'recent': recent, 'tags':tags, 'visit': visit})
 

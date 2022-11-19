@@ -8,12 +8,14 @@
     <meta name="description" content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis molestias sed ab! Corrupti voluptatibus debitis voluptates. Enim magni voluptates exercitationem quod. Aspernatur itaque ut vel et alias dolore libero aperiam.">
     <title>Offiis</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/swiper.min.css' %}">
     <script src="{% static 'js/all.js' %}"></script>
 </head>
 <body>
    
 <!-- header and nav -->
-<nav>
+<nav id="nav-lg">
     <div class="add-social-wrapper">
             <div class="contact-box-up">
                 <div class="email-box">
@@ -41,11 +43,6 @@
             </div>
         </div>
         <div class="nav-wrapper">
-             <!-- menu btn -->
-            <button class="menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
-            <!-- end of menu btn -->
             <div class="nav-links">
                 <a href="#">Home</a>
                 <a href="#about">about</a>
@@ -55,12 +52,50 @@
                 <img src="{% static 'img/logo-img.jpg' %}" alt="logo Offiis">
             </div>
             <div class="nav-links">
+                <button class="search-open-btn" aria-label="open search button">
+                    <i class="fas fa-search"></i>
+                </button>
+                <a href="#appInter">app Interface</a>
                 <a href="#demo">see demo</a>
-                <a href="#privacy">privacy</a>
                 <a href="#download" class="download-pointer">download</a>
+            </div>
+            <div class="search-form">
+                <input type="search" placeholder="search for blog">
+                <button class="search-btn" aria-label="search button">
+                    <i class="fas fa-search"></i>
+                </button>
             </div>
         </div>
     </nav>
+    <!-- mobile nav -->
+    <nav class="mobile-nav">
+        <button class="menu-btn" aria-label="mobile navigation button">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-items">
+            <ul>
+                <li>
+                    <a href="#">home</a>
+                </li>
+                <li>
+                    <a href="#about">about</a>
+                </li>
+                <li>
+                    <a href="#features">features</a>
+                </li>
+                <li>
+                    <a href="#appInter">app interface</a>
+                </li>
+                <li>
+                    <a href="#demo">see demo</a>
+                </li>
+                <li>
+                    <a href="#">download</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- end of mobile nav -->
 
 {% block content %}
 
@@ -121,7 +156,7 @@
             <button class="icon-btn">
                 <i class="fas fa-envelope"></i>
             </button>
-            <p>info@offiisemail@gmail.com</p>
+            <p>info@offiisemail.com</p>
         </div>
         <div class="phone-box">
             <button class="icon-btn">
@@ -132,6 +167,9 @@
     </div>
 </footer>
 <script src="{% static 'js/aos.js' %}"></script>
+<script src="{% static 'js/swiper.min.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
+
+  </script>
 </body>
 </html>

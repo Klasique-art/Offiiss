@@ -42,10 +42,9 @@ class Like(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='likes')
 
 class Subscription(models.Model):
-    name = models.CharField(max_length=200)
     email = models.EmailField()
     def __str__(self):
-        return self.name
+        return self.email
 
 class FeedBack(models.Model):
     name = models.CharField(max_length=200)

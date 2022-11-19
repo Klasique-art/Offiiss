@@ -424,6 +424,9 @@ nav .nav-wrapper{
     flex-direction: column;
     justify-content: space-between;
 }
+.feat-wrapper .icon {
+    font-size: 2.5rem;
+}
 /* end of features */
 /* footer */
 footer {

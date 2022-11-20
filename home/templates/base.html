@@ -141,13 +141,13 @@
                     <a href="#features">features</a>
                 </li>
                 <li>
-                    <a href="#">Subscribe to our news feed</a>
+                    <a href="{% url 'feed' %}">Subscribe to our news feed</a>
                 </li>
                 <li>
                     <a href="#">FAQ</a>
                 </li>
                 <li>
-                    <a href="#">Sitemap</a>
+                    <a href="{% url 'django.contrib.sitemaps.views.sitemap' %}">Sitemap</a>
                 </li>
                 <li>
                     <a href="#">Terms and conditions</a>
@@ -161,7 +161,7 @@
             <h1>newsletter</h1>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis, nesciunt.</p>
             <div class="mail-box">
-                <input type="email" id="email" name="email" placeholder="your email address">
+                <input id="email" type="email" name="email" placeholder="your email address">
                 <button id="email-sub" class="send-btn">
                     <i class="fas fa-arrow-alt-circle-right"></i>Register
                 </button>
@@ -211,6 +211,21 @@ e.preventDefault();
 
 }
 }
+$("#email-sub").click((e) => {
+var email = $("#email").val();
+$.post({
+url: "{% url 'letter' %}",
+data: {email: email},
+success: (res) => {
+alert(res.message)
+}, error: (err) => {
+alert(err)
+} 
+})
+
+
+})
+
 </script>
 </body>
 </html>

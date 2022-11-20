@@ -1,4 +1,7 @@
+// loader
+const loader = document.querySelector(".loader")  
 window.addEventListener("load", () => {
+    loader.style.display = "none"
   // swiper init
   var swiper = new Swiper(".slide-content", {
     slidesPerView: 3,
@@ -39,8 +42,7 @@ window.addEventListener("load", () => {
     mirror: false,
     anchorPlacement: "top-bottom",
   });
-    // loader
-    const loader = document.querySelector(".loader")   
+     
   // welcome notice
   const welNote = document.querySelector(".wel-notice");
 

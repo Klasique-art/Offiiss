@@ -67,7 +67,7 @@
             </div>
             <div class="search-form">
 <form action="{% url 'search' %}" method="GET">
-                <input type="search" id="search" name="search" placeholder="search for articles">
+                <input type="search" id="search" name="search" placeholder="search for articles" required>
                 <button id="search-sub" type="submit" class="search-btn" aria-label="search button">
                     <i class="fas fa-search"></i>
                 </button>
@@ -80,6 +80,9 @@
         <button class="menu-btn" aria-label="mobile navigation button">
             <i class="fas fa-bars"></i>
         </button>
+        <div class="logo-box">
+            <img src="{% static 'img/logo-img.jpg' %}" alt="logo">
+        </div>
         <div class="nav-items">
             <ul>
                 <li>
@@ -105,6 +108,9 @@
     </nav>
     <!-- end of mobile nav -->
 
+    <!-- preloader -->
+    <div class="loader"></div>
+    <!-- end of preloader -->
 {% block content %}
 
 {% endblock %}
@@ -117,16 +123,16 @@
             </div>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius delectus, nam tempora ipsa consequuntur a mollitia distinctio velit doloribus suscipit, temporibus atque modi voluptates voluptatum. Non asperiores nobis fuga nemo.</p>
             <div class="social-wrapper">
-                <button class="social-btn">
+                <button class="social-btn" data-aos="fade-up" data-aos-delay="100" aria-label="facebook link">
                     <i class="fab fa-facebook"></i>
                 </button>
-                <button class="social-btn">
+                <button class="social-btn" data-aos="fade-up" data-aos-delay="200" aria-label="instagram link">
                     <i class="fab fa-instagram"></i>
                 </button>
-                <button class="social-btn">
+                <button class="social-btn" data-aos="fade-up" data-aos-delay="300" aria-label="twitter link">
                     <i class="fab fa-twitter"></i>
                 </button>
-                <button class="social-btn">
+                <button class="social-btn" data-aos="fade-up" data-aos-delay="400" aria-label="youtube link">
                     <i class="fab fa-youtube"></i>
                 </button>
             </div>
@@ -162,8 +168,8 @@
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis, nesciunt.</p>
             <div class="mail-box">
                 <input id="email" type="email" name="email" placeholder="your email address">
-                <button id="email-sub" class="send-btn">
-                    <i class="fas fa-arrow-alt-circle-right"></i>Register
+                <button id="email-sub" class="send-btn" aria-label="subscribe to get updates">
+                    <i class="fas fa-arrow-alt-circle-right"></i>
                 </button>
             </div>
         </div>
@@ -173,13 +179,13 @@
     <!-- contact info box -->
     <div class="contact-info-box">
         <div class="mail-box">
-            <button class="icon-btn">
+            <button class="icon-btn" aria-label="offis email">
                 <i class="fas fa-envelope"></i>
             </button>
             <p>info@offiisemail.com</p>
         </div>
         <div class="phone-box">
-            <button class="icon-btn">
+            <button class="icon-btn" aria-label="offis telephone">
                 <i class="fas fa-phone-alt"></i>
             </button>
             <p>+233 234 5678</p>

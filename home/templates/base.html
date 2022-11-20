@@ -64,9 +64,14 @@
                 <button class="search-open-btn" aria-label="open search button">
                     <i class="fas fa-search"></i>
                 </button>
+{% if request.path  == "/" %}
+
                 <a href="#appInter">app Interface</a>
                 <a href="#demo">see demo</a>
-                <a href="#download" class="download-pointer">download</a>
+{% else %}
+{% endif %}
+                <a href="#download" 
+                class="download-pointer">download</a>
             </div>
             <div class="search-form">
 <form action="{% url 'search' %}" method="GET">

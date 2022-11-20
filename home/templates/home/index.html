@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load tag %}
 {% block content %}
 {% if visit  %}
 <div class="wel-notice" role="alert">
@@ -181,10 +182,14 @@
 </section>
 <!-- demo -->
 <!-- blog -->
+{% for post in recent %}
+{{post.title}} by published {{post.created_on|ago}}
+{% endfor %}
+
 <section id="blog">
     <div class="blog">
         <div class="blog-head feat-head">
-            <h3>our recent blog</h3>
+            <h3>our recent articles</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque explicabo repudiandae culpa deserunt velit molestiae non ea quod ad? Necessitatibus sit corporis commodi harum amet consequatur, blanditiis exercitationem sed. Rerum.</p>
         </div>
         <div class="blog-wrapper">

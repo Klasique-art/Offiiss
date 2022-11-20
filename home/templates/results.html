@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load tag %}
+
+{% block title %}{{title}} Search{% endblock %}
+
+{% block content %}
+
+<section class="tags-main">
+  <div class="section-wrapper">
+      <h1 style="margin-bottom: 4rem;">search results</h1>
+      {% for post in page_obj %}
+        <a href="{{ post.get_absolute_url }}" class="tags-item-wrapper" data-aos="fade-up">
+          <div class="img-box" data-aos="zoom-in">
+            <img src="{{post.image.url}}" aria-label="blog image" alt="blog image"> 
+          </div>
+          <div class="content-box">
+            <div class="extra-wrapper">
+              <p>{{post.text|read_time}}</p>
+              <p>{{ post.created_on|ago }} by {{ post.author }}</p>
+            </div>
+            <h3 class="title" data-aos="fade-up">{{ post.title|markdown|truncatewords_html:15 }}</h3>
+            {{ post.text|markdown|truncatewords_html:18 }}
+          </div>
+        </a>
+        {% empty %}
+        <p>No search results</p>
+        
+        {% endfor %}
+      </div>
+      <div class="pagination-tag">
+        {% include "pagination.html" with page=page_obj %}
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

@@ -4,7 +4,7 @@
 {% block content %}
 {% if visit  %}
 <div class="wel-notice" role="alert">
-    <h1>Welcome back our user. Do not forget to download the offis app.</h1>
+    <h4>Welcome back our user. Do not forget to download the offis app.</h4>
 </div>
 {% else %}
 <div class="wel-notice" role="alert">
@@ -14,8 +14,8 @@
  <!-- header content -->
  <header>
     <div class="header-content">
-        <div class="offet-border">
-            <div class="welcome-msg-box">
+        <div class="offet-border" data-aos="fade-right">
+            <div class="welcome-msg-box" data-aos="fade-left">
                 <h1 class="wel-msg">Offiis export / import</h1>
                 <p class="wel-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur rem deleniti, placeat laudantium totam, dolores at recusandae vitae consequatur inventore accusamus facilis nostrum enim vel dolorum! Accusamus corrupti ex ipsum!</p>
                 <h2>download app now</h2>
@@ -38,7 +38,7 @@
             </div>
         </div>
         
-        <div class="img-box">
+        <div class="img-box" data-aos="fade-left">
             <img src="{% static 'img/header-img.jpg' %}" alt="image of mobile phone with offiis app opened">
         </div>
     </div>
@@ -48,17 +48,17 @@
 <!-- about section  -->
 <section id="about">
     <div class="section-wrapper">
-        <div class="about-head">
+        <div class="about-head" data-aos="fade-up">
             <h3>about our app</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque explicabo repudiandae culpa deserunt velit molestiae non ea quod ad? Necessitatibus sit corporis commodi harum amet consequatur, blanditiis exercitationem sed. Rerum.</p>
         </div>
         <div class="about-content-box">
-            <div class="img-box">
+            <div class="img-box" data-aos="fade-left">
                 <img src="{% static 'img/about-img.jpg' %}" alt="">
             </div>
-            <div class="about-wrapper">
+            <div class="about-wrapper" data-aos="fade-right">
                 <!-- start -->
-                <div class="about-box">
+                <div class="about-box" data-aos="fade-up" data-aos-delay="100">
                     <i class="fas fa-check-circle icon"></i>
                     <div class="text-box">
                         <h4>access clearing agent</h4>
@@ -67,7 +67,7 @@
                 </div>
                 <!-- end -->
                 <!-- start -->
-                <div class="about-box">
+                <div class="about-box" data-aos="fade-up" data-aos-delay="200">
                     <i class="fas fa-check-circle icon"></i>
                     <div class="text-box">
                         <h4>review your agent</h4>
@@ -76,7 +76,7 @@
                 </div>
                 <!-- end -->
                 <!-- start -->
-                <div class="about-box">
+                <div class="about-box" data-aos="fade-up" data-aos-delay="300">
                     <i class="fas fa-check-circle icon"></i>
                     <div class="text-box">
                         <h4>best user experience</h4>
@@ -92,12 +92,12 @@
 <!-- app features -->
 <section id="features">
     <div class="section-wrapper">
-        <div class="feat-head">
+        <div class="feat-head" data-aos="fade-up">
             <h3>app features</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque explicabo repudiandae culpa deserunt velit molestiae non ea quod ad? Necessitatibus sit corporis commodi harum amet consequatur, blanditiis exercitationem sed. Rerum.</p>
         </div>
         <div class="feat-wrapper">
-            <div class="detail-wrapper detail-1">
+            <div class="detail-wrapper detail-1" data-aos="fade-right">
                 <div class="detail-box">
                     <i class="fas fa-box-open icon"></i>
                     <h4>unlimited features</h4>
@@ -109,10 +109,10 @@
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, quae!</p>
                 </div>
             </div>
-            <div class="img-box">
+            <div class="img-box" data-aos="zoom-out">
                 <img src="{% static 'img/features.jpg' %}" alt="">
             </div>
-            <div class="detail-wrapper detail-2">
+            <div class="detail-wrapper detail-2" data-aos="fade-left">
                 <div class="detail-box">
                     <i class="fas fa-mobile-alt icon"></i>
                     <h4>ios & android version</h4>
@@ -131,11 +131,11 @@
 <!-- app interface -->
 <section class="app-interface" id="appInter">
     <div class="section-wrapper">
-        <div class="inter-head">
+        <div class="inter-head" data-aos="fade-up">
             <h3>check out our app interface look</h3>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius aut vel inventore sed, esse dolor voluptatem deleniti ut labore, facere ea, assumenda optio facilis alias quas minima natus nobis nostrum?</p>
         </div>
-        <div class="slide-container swiper">
+        <div class="slide-container swiper" data-aos="fade-up">
             <div class="slide-content">
                 <div class="card-wrapper swiper-wrapper">
                     <div class="img-box swiper-slide">
@@ -165,13 +165,13 @@
 <!-- end of demo -->
 <section id="demo">
     <div class="section-wrapper">
-        <div class="demo-head feat-head">
+        <div class="demo-head feat-head" data-aos="fade-up">
             <h3>how to use the app perfectly</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque explicabo repudiandae culpa deserunt velit molestiae non ea quod ad? Necessitatibus sit corporis commodi harum amet consequatur, blanditiis exercitationem sed. Rerum.</p>
         </div>
     </div>
     <!-- video box -->
-    <div class="video-box">
+    <div class="video-box" data-aos="fade-up">
         <video src="{% static 'img/demo-vid.mp4' %}" muted loop>Your browser does not support video tag</video>
         <div class="vid-overlay">
             <button class="play-btn play">
@@ -182,18 +182,18 @@
 </section>
 <!-- demo -->
 <!-- blog -->
-{% for post in recent %}
-{{post.title}} by published {{post.created_on|ago}}
-{% endfor %}
 
 <section id="blog">
     <div class="blog">
-        <div class="blog-head feat-head">
+        <div class="blog-head feat-head" data-aos="fade-up">
             <h3>our recent articles</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque explicabo repudiandae culpa deserunt velit molestiae non ea quod ad? Necessitatibus sit corporis commodi harum amet consequatur, blanditiis exercitationem sed. Rerum.</p>
         </div>
         <div class="blog-wrapper">
             <!-- start of blog -->
+            {% for post in recent %}
+            {{post.title}} by published {{post.created_on|ago}}
+            {% endfor %}
             
             <!-- end of blog -->
         </div>

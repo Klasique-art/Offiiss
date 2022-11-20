@@ -28,8 +28,8 @@ path('offis-api/', include('imex_app.urls')),
     path('sitemap.xml', sitemap, # new
         {'sitemaps': maps},
         name='django.contrib.sitemaps.views.sitemap'),
-
 ]
-#if settings.DEBUG:
-urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+  urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+  urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

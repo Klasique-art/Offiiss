@@ -50,9 +50,12 @@
         </div>
         <div class="nav-wrapper">
             <div class="nav-links">
-                <a href="#">Home</a>
+                <a href="/">Home</a>
+{% if request.path  == "/" %}
                 <a href="#about">about</a>
                 <a href="#features">features</a>
+{% else %}
+{% endif %}
             </div>
             <div class="logo-box">
                 <img src="{% static 'img/logo-img.jpg' %}" alt="logo Offiis">
@@ -140,12 +143,16 @@
         <div class="section-2">
             <h1>quick links</h1>
             <ul>
+{% if request.path == '/' %}
                 <li>
                     <a href="#about">about</a>
                 </li>
                 <li>
                     <a href="#features">features</a>
                 </li>
+{% else %}
+
+{% endif %}
                 <li>
                     <a href="{% url 'feed' %}">Subscribe to our news feed</a>
                 </li>

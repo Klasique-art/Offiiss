@@ -9,9 +9,13 @@ from django.contrib.sitemaps.views import sitemap # new
 from home.sitemap import BlogSitemap
 
 maps = {"blog": BlogSitemap}
+from home import blog_views
 
 
 urlpatterns = [
+path('tag/<slug:tag_slug>/', blog_views.tags, name='post_list_by_tag'),
+path('like/', blog_views.like, name='like'),
+path("comment/", blog_views.comment, name="comment"),
 path('detail/<int:pk>/<slug:slug>/', detail, name='detail'),
     path('feed/', feeds.LatestPostsFeed(), name='feed'),
 path('search/', search, name='search'),

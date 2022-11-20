@@ -90,6 +90,17 @@ img {
 textarea {
     resize: none;
 }
+/* loader */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: red;
+    z-index: 200000;
+}
+/* end of loader */
 body {
     overflow-x: hidden;
     font-family: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", "Segoe UI Symbol", sans-serif;

@@ -192,7 +192,8 @@
         <div class="blog-wrapper">
             <!-- start of blog -->
             {% for post in recent %}
-            {{post.title}} by published {{post.created_on|ago}}
+            {{post.title}} published by {{post.created_on|ago}}
+            <img src=" {{post.image.url}}" alt=" {{post.title}}">
             {% endfor %}
             
             <!-- end of blog -->

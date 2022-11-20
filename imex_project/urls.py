@@ -3,10 +3,11 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 from home.views import terms, privacy
-from home.blog_views import home_page, letter
+from home.blog_views import home_page, letter, search
 
 
 urlpatterns = [
+path('search/', search, name='search'),
 path('letter/', letter, name='letter'),
 path('', home_page, name='home'),
 path('privacy/', privacy, name='privacy'),

@@ -7,6 +7,18 @@ from django.core.paginator import Paginator, PageNotAnInteger
 from django.db.models import Count, Q
 from django.contrib import messages
 from django.core.paginator import Paginator
+def search(request):
+    if request.GET.get('search'):
+        q = request.GET.get('search')
+        post = Blog.objects.filter(Q(title__icontains=q) | Q(author__icontains=q) | Q(text__icontains=q))
+        title = request.GET.get('search')
+
+        if q is not None:
+            prop = Paginator(post, 12)
+            page = request.GET.get('page')
+            page_obj = prop.get_page(page)
+            return render(request, 'results.html', {'page_obj': page_obj, "title": title})
+
 
 @api_view(["POST"])
 def letter(request):

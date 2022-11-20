@@ -1,4 +1,5 @@
 {% load static %}
+{% load tag %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis molestias sed ab! Corrupti voluptatibus debitis voluptates. Enim magni voluptates exercitationem quod. Aspernatur itaque ut vel et alias dolore libero aperiam.">
-    <title>Offiis</title>
+    <title>Offiis {% block title %} {% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/aos.css' %}">
     <link rel="stylesheet" href="{% static 'css/swiper.min.css' %}">
@@ -60,10 +61,12 @@
                 <a href="#download" class="download-pointer">download</a>
             </div>
             <div class="search-form">
-                <input type="search" placeholder="search for blog">
-                <button class="search-btn" aria-label="search button">
+<form action="{% url 'search' %}" method="GET">
+                <input type="search" id="search" name="search" placeholder="search for articles">
+                <button id="search-sub" type="submit" class="search-btn" aria-label="search button">
                     <i class="fas fa-search"></i>
                 </button>
+</form>
             </div>
         </div>
     </nav>
@@ -133,6 +136,18 @@
                     <a href="#features">features</a>
                 </li>
                 <li>
+                    <a href="#">Subscribe to our news feed</a>
+                </li>
+                <li>
+                    <a href="#">FAQ</a>
+                </li>
+                <li>
+                    <a href="#">Sitemap</a>
+                </li>
+                <li>
+                    <a href="#">Terms and conditions</a>
+                </li>
+                <li>
                     <a href="#privacy">privacy</a>
                 </li>
             </ul>
@@ -171,5 +186,27 @@
 <script src="{% static 'js/main.js' %}"></script>
 
   </script>
+<script>
+document.getElementById("search").onkeyup = (e) => {
+let search = document.getElementById("search").value
+if (search !== '') {
+if (e.keyCode === 13) {
+document.getElementById("search-sub").click();
+}
+}
+
+else {
+
+}
+}
+document.getElementById("search-sub").onclick = (e) => {
+var search = document.getElementById("search").value;
+if (search === '') {
+e.preventDefault();
+
+}
+}
+alert("Please add jquery links to the site. I will use it to do something.");
+</script>
 </body>
 </html>

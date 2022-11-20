@@ -97,7 +97,8 @@ textarea {
     left: 0;
     width: 100%;
     height: 100vh;
-    background: red;
+    background: url(../img/Spin-loader.gif) no-repeat center center;
+    background-color: var(--white);
     z-index: 200000;
 }
 /* end of loader */

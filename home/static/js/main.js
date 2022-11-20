@@ -39,6 +39,8 @@ window.addEventListener("load", () => {
     mirror: false,
     anchorPlacement: "top-bottom",
   });
+    // loader
+    const loader = document.querySelector(".loader")   
   // welcome notice
   const welNote = document.querySelector(".wel-notice");
 

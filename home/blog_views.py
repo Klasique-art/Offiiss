@@ -32,7 +32,7 @@ def letter(request):
 def home_page(request):
     tags = Tag.objects.all()
     visit = None
-    recent = Blog.objects.all()[:7]
+    recent = Blog.objects.all()[:6]
     if request.session.get('visitors'):
         visit = True
         request.session['visitors'] = int(request.session.get('visitors') + 1)

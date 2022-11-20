@@ -192,8 +192,19 @@
         <div class="blog-wrapper">
             <!-- start of blog -->
             {% for post in recent %}
-            {{post.title}} published by {{post.created_on|ago}}
-            <img src=" {{post.image.url}}" alt=" {{post.title}}">
+            <div class="blog-card">
+                <div class="img-box" aria-label="blog image">
+                    <img src=" {{post.image.url}}" alt=" {{post.title}}">
+                </div>
+                <div class="content-box">
+                    <p class="date" aria-label="date {{post.created_on}}">published {{post.created_on|ago}}</p>
+                    <p class="title" aria-label="blog title">{{post.title|markdown|truncatewords_html:15}}</p>
+                    <p class="text">{{ post.text|markdown|truncatewords_html:20 }}</p>
+                    <a href="{{post.get_absolute_url}}" class="read-more-btn" target="_blank">
+                        read more</a>
+                </div>
+            </div>
+             
             {% endfor %}
             
             <!-- end of blog -->

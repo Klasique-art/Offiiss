@@ -797,6 +797,15 @@ nav .nav-wrapper{
     padding-top: 30rem;
     padding-bottom: 30rem;
 }
+.blog-wrapper .img-box {
+    width: 10rem;
+    height: 10rem;
+}
+.blog-wrapper .img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 @media (max-width: 768px) {
     #blog {
         padding-top: 18rem;

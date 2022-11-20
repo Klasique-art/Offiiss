@@ -19,7 +19,7 @@
       <div class="detail-box"> 
         <div class="extra-wrapper">
           <p>{{post.text|read_time}}</p>
-          <p>Published {{ post.created_on|ago }} by {{ post.author }}</p>
+          <p>Published {{ post.created_on|ago }}</p>
         </div>
       </div>
       <div class="img-box" data-aos="zoom-in">
@@ -27,13 +27,6 @@
       </div>
       <h3 class="title" data-aos="fade-up">{{ post.title }}</h3>
       {{ post.text|markdown }}
-      <!-- like btn -->
-      <div class="like-box">
-        <button class="like-btn" id="like-btn" data-catid="{{post.pk}}">
-          <i class="far fa-thumbs-up"></i>LIKE
-        </button>
-        <h4><span id="like-number">{{likes}}</span> <span id="text"></span></h4>
-      </div>
       <!-- comment -->
       <h4 class="comment-head">Add your comment</h4>
       <button class="comment-btn all-btns" aria-label="open or close comment section">Open</button>
@@ -91,18 +84,7 @@
   </div>
 </section>
 <!-- end of detail container -->
-  <!-- diplay comment sent message and disappear -->
-  <script>
-    const msgAlert = document.querySelector(".comment-msg")
-
-    function closeAlert(box) {
-      box.style.display = "none"
-    }
-    // message should disappear after 6 secs
-    setTimeout(() => {
-      closeAlert(msgAlert)
-    }, 3000);
-  </script>
+ 
 
 
 {% endblock %}

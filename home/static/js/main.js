@@ -1,7 +1,7 @@
 // loader
-const loader = document.querySelector(".loader")  
+const loader = document.querySelector(".loader");
 window.addEventListener("load", () => {
-    loader.style.display = "none"
+  loader.style.display = "none";
   // swiper init
   var swiper = new Swiper(".slide-content", {
     slidesPerView: 3,
@@ -42,7 +42,7 @@ window.addEventListener("load", () => {
     mirror: false,
     anchorPlacement: "top-bottom",
   });
-     
+
   // welcome notice
   const welNote = document.querySelector(".wel-notice");
 
@@ -56,7 +56,7 @@ window.addEventListener("load", () => {
     navbar.classList.toggle("sticky", scrollY > 70);
     if (window.scrollY > 0) {
       mobileNavItems.classList.remove("open");
-      searchForm.classList.remove("open")
+      searchForm.classList.remove("open");
     }
   });
 
@@ -87,19 +87,5 @@ window.addEventListener("load", () => {
     overlay.style.backgroundColor = "rgba(65, 105, 225,.5)";
   }
 
-  // mobile nav
-  const mobileNavBtn = document.querySelector(".mobile-nav .menu-btn");
-  const mobileNavItems = document.querySelector(".mobile-nav .nav-items");
 
-  mobileNavBtn.addEventListener("click", () => {
-    mobileNavItems.classList.toggle("open");
-  });
-
-    //   search btn to reaveal search input
-    const searchOpenBtn = document.querySelector(".search-open-btn")
-    const searchForm = document.querySelector(".search-form")
-
-    searchOpenBtn.addEventListener("click", ()=>{
-        searchForm.classList.toggle("open")
-    })
 });

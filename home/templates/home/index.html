@@ -192,7 +192,7 @@
         <div class="blog-wrapper">
             <!-- start of blog -->
             {% for post in recent %}
-            <div class="blog-card">
+            <div class="blog-card" tabindex="0" data-aos="fade-up">
                 <div class="img-box" aria-label="blog image">
                     <img src=" {{post.image.url}}" alt=" {{post.title}}">
                 </div>
@@ -200,17 +200,16 @@
                     <p class="date" aria-label="date {{post.created_on}}">published {{post.created_on|ago}}</p>
                     <p class="title" aria-label="blog title">{{post.title|markdown|truncatewords_html:15}}</p>
                     <p class="text">{{ post.text|markdown|truncatewords_html:20 }}</p>
-                    <a href="{{post.get_absolute_url}}" class="read-more-btn" target="_blank">
+                    <a href="{{post.get_absolute_url}}" class="read-more-btn">
                         read more</a>
                 </div>
             </div>
-             
-            {% endfor %}
-            
+            {% endfor %}          
             <!-- end of blog -->
         </div>
     </div>
 </section>
 <!-- end of blog -->
+
  
 {% endblock %}

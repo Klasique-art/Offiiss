@@ -87,5 +87,4 @@ window.addEventListener("load", () => {
     overlay.style.backgroundColor = "rgba(65, 105, 225,.5)";
   }
 
-
 });

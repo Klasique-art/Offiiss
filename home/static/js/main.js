@@ -51,19 +51,34 @@ window.addEventListener("load", () => {
   }, 1000);
 
   //the demo video functionality
+  const videoBox = document.querySelector("#demo .video-box");
   const video = document.querySelector("#demo video");
   const playBtn = document.querySelector("#demo .play-btn");
   const overlay = document.querySelector("#demo .vid-overlay");
+
 
   playBtn.addEventListener("click", () => {
     const hasPlay = playBtn.classList.contains("play");
     if (hasPlay) {
       playVid();
+      videoBox.addEventListener("mouseenter", ()=>{
+        overlay.classList.remove("leave")
+      })
+      videoBox.addEventListener("mouseleave", ()=>{
+        overlay.classList.remove("show")
+        overlay.classList.add("leave")
+
+      })
     } else {
       pauseVid();
+      videoBox.addEventListener("mouseleave", ()=>{
+        overlay.classList.remove("leave")
+        overlay.classList.add("show")
+      })
     }
   });
 
+  
   function playVid() {
     video.play();
     playBtn.innerHTML = `<i class="fas fa-pause"></i>`;

@@ -13,7 +13,7 @@
  const mobileNavItems = document.querySelector(".mobile-nav .nav-items");
 
  mobileNavBtn.addEventListener("click", () => {
-     mobileNavBtn.classList.toggle("open")
+     mobileNavItems.classList.toggle("open")
  });
 
  //   search btn to reaveal search input

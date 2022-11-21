@@ -781,6 +781,12 @@ nav .nav-wrapper{
     -o-transition: .4s;
     -moz-transition: .4s;
 }
+#demo .video-box .vid-overlay.leave {
+    transform: translateY(-100%);
+}
+#demo .video-box .vid-overlay.show {
+    transform: translateY(0);
+}
 .video-box .vid-overlay .play-btn {
     width: 10rem;
     height: 10rem;
@@ -1007,7 +1013,9 @@ nav .nav-wrapper{
 }
 .comment-msg {
     color: var(--lightBlue);
-    padding: 5rem;
+    background: var(--white);
+    padding: 3rem;
+    font-size: 2rem!important;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -1017,6 +1025,11 @@ nav .nav-wrapper{
     font-size: 3rem;
     border-radius: 6px;
     pointer-events: none;
+    transition: .5s;
+    --webkit-transition: .5s;
+}
+.comment-msg.go {
+    transform: translateY(-102vh);
 }
 .comment-btn {
     text-transform: capitalize;
@@ -1373,6 +1386,27 @@ nav .nav-wrapper{
     max-width: var(--max-width);
     margin: 0 auto;
 }
+.terms-wrapper p {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+.privacy-wrapper .heading,
+.terms-wrapper .heading {
+    margin: 1rem 0;
+    text-align: center;
+    color: var(--deepBlue);
+    font-size: 2.5rem;
+    text-transform: uppercase;
+}
+.privacy-wrapper .terms-list li,
+.terms-wrapper .terms-list li {
+    margin-bottom: 1rem;
+}
+.privacy-wrapper .terms-list,
+.terms-wrapper .terms-list {
+    padding: 1rem;
+    font-size: 2rem;
+}
 .terms-wrapper .img-box {
     width: 60%;
     height: 40rem;
@@ -1430,6 +1464,10 @@ nav .nav-wrapper{
     .privacy-container .title, 
     .faq-container .title {
         font-size: 2rem;
+    }
+    .privacy-wrapper .terms-list,
+    .terms-wrapper .terms-list {
+        font-size: 1.8rem;
     }
     .quest-wrapper .quest {
         font-size: 1.8rem;

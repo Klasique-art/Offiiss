@@ -50,16 +50,6 @@ window.addEventListener("load", () => {
     welNote.classList.add("go");
   }, 1000);
 
-  // making the navbar sticky
-  const navbar = document.querySelector(".nav-wrapper");
-  window.addEventListener("scroll", () => {
-    navbar.classList.toggle("sticky", scrollY > 70);
-    if (window.scrollY > 0) {
-      mobileNavItems.classList.remove("open");
-      searchForm.classList.remove("open");
-    }
-  });
-
   //the demo video functionality
   const video = document.querySelector("#demo video");
   const playBtn = document.querySelector("#demo .play-btn");

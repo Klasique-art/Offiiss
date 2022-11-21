@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<section class="tags-main">
+<section class="result-main">
   <div class="section-wrapper">
       <h1 style="margin-bottom: 4rem;">search results</h1>
       {% for post in page_obj %}
@@ -16,7 +16,7 @@
           <div class="content-box">
             <div class="extra-wrapper">
               <p>{{post.text|read_time}}</p>
-              <p>{{ post.created_on|ago }} by {{ post.author }}</p>
+              <p>{{ post.created_on|ago }}</p>
             </div>
             <h3 class="title" data-aos="fade-up">{{ post.title|markdown|truncatewords_html:15 }}</h3>
             {{ post.text|markdown|truncatewords_html:18 }}
@@ -26,9 +26,9 @@
         <p>No search results</p>
         
         {% endfor %}
-      </div>
-      <div class="pagination-tag">
-        {% include "pagination.html" with page=page_obj %}
+        <div class="pagination-tag" style="text-align:center;">
+          {% include "pagination.html" with page=page_obj %}
+        </div>
       </div>
     </div>
   </section>

@@ -83,7 +83,7 @@ window.addEventListener("load", () => {
     video.play();
     playBtn.innerHTML = `<i class="fas fa-pause"></i>`;
     playBtn.classList.remove("play");
-    overlay.style.backgroundColor = "rgba(65, 105, 225,.1)";
+    overlay.style.backgroundColor = "rgba(65, 105, 225,.4)";
   }
   function pauseVid() {
     video.pause();

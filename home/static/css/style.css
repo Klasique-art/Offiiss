@@ -792,9 +792,9 @@ nav .nav-wrapper{
     height: 10rem;
     border-radius: 50%;
     font-size: 5rem;
-    background: rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, .2);
     box-shadow: 0 0 5px rgba(0,0,0,.5);
-    color: rgba(7, 7, 104, 0.2);
+    color: rgba(7, 7, 104, 0.3);
     display: flex;
     justify-content: center;
     align-items: center;

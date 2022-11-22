@@ -50,35 +50,40 @@ window.addEventListener("load", () => {
     welNote.classList.add("go");
   }, 1000);
 
-  // making the navbar sticky
-  const navbar = document.querySelector(".nav-wrapper");
-  window.addEventListener("scroll", () => {
-    navbar.classList.toggle("sticky", scrollY > 70);
-    if (window.scrollY > 0) {
-      mobileNavItems.classList.remove("open");
-      searchForm.classList.remove("open");
-    }
-  });
-
   //the demo video functionality
+  const videoBox = document.querySelector("#demo .video-box");
   const video = document.querySelector("#demo video");
   const playBtn = document.querySelector("#demo .play-btn");
   const overlay = document.querySelector("#demo .vid-overlay");
+
 
   playBtn.addEventListener("click", () => {
     const hasPlay = playBtn.classList.contains("play");
     if (hasPlay) {
       playVid();
+      videoBox.addEventListener("mouseenter", ()=>{
+        overlay.classList.remove("leave")
+      })
+      videoBox.addEventListener("mouseleave", ()=>{
+        overlay.classList.remove("show")
+        overlay.classList.add("leave")
+
+      })
     } else {
       pauseVid();
+      videoBox.addEventListener("mouseleave", ()=>{
+        overlay.classList.remove("leave")
+        overlay.classList.add("show")
+      })
     }
   });
 
+  
   function playVid() {
     video.play();
     playBtn.innerHTML = `<i class="fas fa-pause"></i>`;
     playBtn.classList.remove("play");
-    overlay.style.backgroundColor = "rgba(65, 105, 225,.1)";
+    overlay.style.backgroundColor = "rgba(65, 105, 225,.4)";
   }
   function pauseVid() {
     video.pause();
@@ -86,6 +91,5 @@ window.addEventListener("load", () => {
     playBtn.classList.add("play");
     overlay.style.backgroundColor = "rgba(65, 105, 225,.5)";
   }
-
 
 });

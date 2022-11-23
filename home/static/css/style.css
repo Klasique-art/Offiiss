@@ -320,6 +320,7 @@ nav .nav-wrapper{
     }
     .header-content .welcome-msg-box .wel-p {
         margin-bottom: 2rem;
+        font-size: 1.8rem;
     }
     .header-content .welcome-msg-box h2 {
         bottom: 2rem;
@@ -457,6 +458,7 @@ nav .nav-wrapper{
 .header-content .welcome-msg-box .wel-p {
     color: var(--gray);
     line-height: 1.2;
+    font-size: 2rem;
     margin-bottom: 2rem;
 }
 .header-content .welcome-msg-box h2 {
@@ -1398,11 +1400,11 @@ nav .nav-wrapper{
     font-size: 2.5rem;
     text-transform: uppercase;
 }
-.privacy-wrapper .terms-list li,
+.privacy-wrapper .privacy-list li,
 .terms-wrapper .terms-list li {
     margin-bottom: 1rem;
 }
-.privacy-wrapper .terms-list,
+.privacy-wrapper .privacy-list,
 .terms-wrapper .terms-list {
     padding: 1rem;
     font-size: 2rem;
@@ -1465,7 +1467,7 @@ nav .nav-wrapper{
     .faq-container .title {
         font-size: 2rem;
     }
-    .privacy-wrapper .terms-list,
+    .privacy-wrapper .privacy-list,
     .terms-wrapper .terms-list {
         font-size: 1.8rem;
     }

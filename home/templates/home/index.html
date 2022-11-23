@@ -138,6 +138,19 @@
                     <h4>ios & android version</h4>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, quae!</p>
                 </div>
+             <div class="tags">
+                <h1 class="section-title" style="margin-bottom: 2rem;" data-aos="fade-up"><span>tags</span></h1>
+                <div class="tags-wrapper">
+                    {% for tag in tags %}
+                    <li class="tag-list" data-aos="fade-up" data-aos-delay="200">
+                        <a href="{% url 'post_list_by_tag' tag.slug %}" aria-label="{{ tag.name }} category">
+                            {{ tag.name }}
+                        </a>
+                    </li>
+                        {% endfor %}
+                </div>
+            </div>
+
                 <div class="detail-box">
                     <i class="fas fa-user-tie icon"></i>
                     <h4>24/7 support by real people</h4>
@@ -189,7 +202,7 @@
     <div class="section-wrapper">
         <div class="demo-head feat-head" data-aos="fade-up">
             <h3>a guide to the app perfectly</h3>
-            <p>Because we truly care about your safety and trust we make sure the platform is built solely for    customs certified clearing agents and freight forwarders. Agents and transporters are taken through a rigorous identification and verification process before their profiles get activated on the platform.                                                              </p>
+            <p>Because we truly care about your safety and trust we make sure the platform is built solely for    customs certified clearing agents and freight forwarders. Agents and transporters are taken through a rigorous identification and verification process before their profiles get activated on the platform.                                       </p>
         </div>
     </div>
     <!-- video box -->

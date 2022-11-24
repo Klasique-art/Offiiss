@@ -114,19 +114,19 @@
     <div class="section-wrapper">
         <div class="feat-head" data-aos="fade-up">
             <h3>app features</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque explicabo repudiandae culpa deserunt velit molestiae non ea quod ad? Necessitatibus sit corporis commodi harum amet consequatur, blanditiis exercitationem sed. Rerum.</p>
+            <p>Our app has quite simple yet powerful features to help you access your agents and transporters for a clean service.</p>
         </div>
         <div class="feat-wrapper">
             <div class="detail-wrapper detail-1" data-aos="fade-right">
                 <div class="detail-box">
                     <i class="fas fa-box-open icon"></i>
-                    <h4>unlimited features</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, quae!</p>
+                    <h4>simple features</h4>
+                    <p>The features of our app is simple and easy to use.</p>
                 </div>
                 <div class="detail-box">
                     <i class="fas fa-drafting-compass icon"></i>
-                    <h4>unlimited features</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, quae!</p>
+                    <h4>simple design</h4>
+                    <p>Our app interface is simple so you can use without difficulty.</p>
                 </div>
             </div>
             <div class="img-box" data-aos="zoom-out">
@@ -136,25 +136,13 @@
                 <div class="detail-box">
                     <i class="fas fa-mobile-alt icon"></i>
                     <h4>ios & android version</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, quae!</p>
+                    <p>Available on both most popular mobile OS platforms. Download our app on your android or IOS device.</p>
                 </div>
-             <div class="tags">
-                <h1 class="section-title" style="margin-bottom: 2rem;" data-aos="fade-up"><span>tags</span></h1>
-                <div class="tags-wrapper">
-                    {% for tag in tags %}
-                    <li class="tag-list" data-aos="fade-up" data-aos-delay="200">
-                        <a href="{% url 'post_list_by_tag' tag.slug %}" aria-label="{{ tag.name }} category">
-                            {{ tag.name }}
-                        </a>
-                    </li>
-                        {% endfor %}
-                </div>
-            </div>
 
                 <div class="detail-box">
                     <i class="fas fa-user-tie icon"></i>
                     <h4>24/7 support by real people</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, quae!</p>
+                    <p>We attend to your messages within 24 hours. Actual people will respond to your concerns.</p>
                 </div>
             </div>
         </div>
@@ -225,7 +213,19 @@
             <p>Rate and Comment on your agent's clearing experience. 
                 More than ever importers and exporters are able to have a voice that gives them absolute control by sharing how they felt about their agents' performance to the public. This helps improve the quality service of agents.
                 </p>
-        </div>
+            </div>
+            <div class="tags">
+                <h1 class="section-title" style="margin-bottom: 2rem;" data-aos="fade-up"><span>tags</span></h1>
+                <div class="tags-wrapper">
+                    {% for tag in tags %}
+                    <li class="tag-list" data-aos="fade-up" data-aos-delay="200">
+                        <a href="{% url 'post_list_by_tag' tag.slug %}" aria-label="{{ tag.name }} category">
+                            {{ tag.name }}
+                        </a>
+                    </li>
+                        {% endfor %}
+                </div>
+            </div>
         <div class="blog-wrapper">
             <!-- start of blog -->
             {% for post in recent %}
@@ -247,6 +247,24 @@
     </div>
 </section>
 <!-- end of blog -->
+<!-- contact form -->
+<section class="contact-section">
+    <div class="section-wrapper">
+        <div class="feat-head" data-aos="fade-up">
+            <h3>contact us</h3>
+            <p>send us a message concerning our services and we will reply within 24 hours.
+                </p>
+            </div>
+        <form action="#" class="contact-form">
+            <input type="text" placeholder="enter your name">
+            <input type="email" placeholder="enter your email">
+            <textarea placeholder="enter your message"></textarea>
+            <input type="submit" value="send" aria-label="send message">
+        </form>
+    </div>
+</section>
+
+<!-- end of contact form -->
 
  
 {% endblock %}

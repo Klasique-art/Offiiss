@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.contrib import messages
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -9,3 +11,4 @@ def privacy(request):
 
 def terms(request):
     return render(request, 'terms.html')
+

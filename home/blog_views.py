@@ -33,6 +33,14 @@ def home_page(request):
     tags = Tag.objects.all()
     visit = None
     recent = Blog.objects.all()[:6]
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        msg = request.POST.get("message")
+        send_mail("User alert", str(msg), email, [], fail_silently=True)
+        messages.success(request, f"Thank you for contacting us {name}.")
+        print("sent email")
+
     if request.session.get('visitors'):
         visit = True
         request.session['visitors'] = int(request.session.get('visitors') + 1)

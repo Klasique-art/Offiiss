@@ -21,7 +21,7 @@ TAGGIT_FORCE_LOWERCASE = True
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 #DEBUG = config('DEBUG',cast = bool)
-DEBUG = False
+DEBUG = True
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = config('SECRET_KEY')
 SECRET_KEY = 'GKDJFLKADFADLKFJ2356'

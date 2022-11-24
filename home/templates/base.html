@@ -443,7 +443,11 @@
             <div class="logo-box">
                 <img src="{% static 'img/logo-img.jpg' %}" alt="offiis logo">
             </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius delectus, nam tempora ipsa consequuntur a mollitia distinctio velit doloribus suscipit, temporibus atque modi voluptates voluptatum. Non asperiores nobis fuga nemo.</p>
+            <p>Bringing Clearing Agent
+                Offices in the Pockets 
+                of Importers and
+                Exporters Alike.
+                 A cloud based Marketplace that revolutionizes the way importers and exporters interact with agents and transporters anytime anywhere, by using the latest in technology.</p>
             <div class="social-wrapper">
                 <button class="social-btn" data-aos="fade-up" data-aos-delay="100" aria-label="facebook link">
                     <i class="fab fa-facebook"></i>
@@ -491,7 +495,7 @@
         </div>
         <div class="section-3">
             <h1>newsletter</h1>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis, nesciunt.</p>
+            <p>Subscribe to our newsletter to recieve regular updates from OFFIIS.</p>
             <div class="mail-box">
                 <input id="email" type="email" name="email" placeholder="your email address">
                 <button id="email-sub" class="send-btn" aria-label="subscribe to get updates">
@@ -552,7 +556,8 @@ $("#email-sub").click((e) => {
         url: "{% url 'letter' %}",
         data: {email: email},
         success: (res) => {
-        alert(res.message)
+            $("#email").css("background", "red")
+            alert(res.message)
         }, error: (err) => {
         alert(err)
     } 

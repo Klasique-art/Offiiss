@@ -6,10 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Bringing Clearing Agent
-    Offices in the Pockets 
-    of Importers and
-    Exporters Alike.
+    <meta name="description" content="Bringing Clearing Agent Offices in the Pockets of Importers and Exporters Alike.
      A cloud based Marketplace that revolutionizes the way importers and exporters interact with agents and transporters anytime anywhere, by using the latest in technology.">
     <title>Offiis {% block title %} {% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -610,7 +607,7 @@ $("#email-sub").click((e) => {
         url: "{% url 'letter' %}",
         data: {email: email},
         success: (res) => {
-            $("#email").css("background", "red")
+            $("#email").val("")
             alert(res.message)
         }, error: (err) => {
         alert(err)
@@ -623,20 +620,6 @@ if ( window.history.replaceState ) {
 }
 
 window.addEventListener("load", () => {
-  // functionality of sidebar
-  const sidebarBtn = document.querySelector(".fixed-nav-btn");
-  const sidebar = document.querySelector(".nav-wrapper");
-
-  sidebarBtn.addEventListener("click", toggleSideBar);
-
-  function toggleSideBar() {
-    sidebar.classList.toggle("active");
-    if (sidebar.classList.contains("active")) {
-      sidebarBtn.innerHTML = "<i class='fas fa-times'></i>";
-    } else {
-      sidebarBtn.innerHTML = "<i class='fas fa-bars'></i>";
-    }
-  }
 
   // comment section
   const commentBox = document.querySelector("#comment");

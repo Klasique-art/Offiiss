@@ -332,6 +332,9 @@ nav .nav-wrapper{
     }
 }
 @media (max-width: 480px) {
+    body {
+        font-size: 1.5rem;
+    }
     .header-content .welcome-msg-box h1 {
         font-size: 2rem!important;
         margin-bottom: 0.5rem;
@@ -435,7 +438,7 @@ nav .nav-wrapper{
 .header-content {
     display: flex;
     padding: 2rem;
-    height: 50rem;
+    height: 45rem;
     gap: 8rem;
 }
 
@@ -1548,24 +1551,106 @@ nav .nav-wrapper{
     border-radius: 4px;
     margin-top: 1rem;
 }
-.quest-wrapper .quest {
-    padding: .5rem;
+
+/* faq accordion */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--royalBlueOpac);
+    width: 100%;
+    padding: 4rem;
     border-radius: 4px;
-    margin-bottom: 0.5rem;
-    font-size: 2rem;
-    color: var(--lightBlue);
-    text-transform: capitalize;
-    font-weight: bold;
-} 
-.quest-wrapper .ans {
-    border-radius: 4px;
-    border: 1px solid var(--lightBlue);
-    padding: 0.5rem;
-    color: var(--gray);
-    font-size: 1.8rem;
-    max-height: 20rem;
-    overflow-y: auto;
 }
+.accordion-wrapper {
+    width: 70%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    transition: .4s;
+    -ms-transition: .4s;
+    -webkit-transition: .4s;
+    -o-transition: .4s;
+    -moz-transition: .4s;
+}
+.accordion-box {
+    box-shadow: 0 0 4px;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: rgba(245, 241, 241, 0.8);
+}
+.accordion-box .title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    gap: .5rem;
+}
+.title-wrapper h5 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--lightBlue);
+}
+.title-wrapper .acc-btn {
+    width: 40px;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    transition: .4s;
+    -ms-transition: .4s;
+    -webkit-transition: .4s;
+    -o-transition: .4s;
+    -moz-transition: .4s;
+}
+.title-wrapper .acc-btn:focus {
+    color: var(--deepBlue);
+}
+.accordion-box .plus {
+    display: block;
+}
+.accordion-box .minus {
+    display: none;
+}
+.accordion-box.show-text .plus {
+    display: none;
+}
+.accordion-box.show-text .minus {
+    display: block;
+}
+.accordion-box.show-text .title-wrapper {
+    border-bottom: 1px solid black;
+    margin-bottom: 1rem;
+}
+.accordion-box .accordion-body {
+    height: 0;
+    overflow: hidden;
+    transition: .4s;
+    -ms-transition: .4s;
+    -webkit-transition: .4s;
+    -o-transition: .4s;
+    -moz-transition: .4s;
+}
+.accordion-box.show-text .accordion-body {
+    height: 150px;
+    overflow-y: auto;
+    box-shadow: 0px 0px 2px;
+    border-radius: 10px;
+    padding: .5rem;
+    background: white;
+}
+.accordion-box .accordion-body p {
+    font-size: 1.8rem;
+}
+.acc-btn span {
+    pointer-events: none;
+}
+/* end of faq accordion */
+
 @media (max-width: 768px) {
     .terms-container, 
     .privacy-container, 
@@ -1579,6 +1664,15 @@ nav .nav-wrapper{
         top: 1rem;
         font-size: 2.5rem;
     }
+    .privacy-container .close-btn:hover, 
+    .privacy-container .close-btn:focus, 
+    .terms-container .close-btn:hover, 
+    .terms-container .close-btn:focus, 
+    .faq-container .close-btn:hover, 
+    .faq-container .close-btn:focus {
+        border: 1px solid black;
+        padding: 1rem;
+    } 
     .terms-container .title, 
     .privacy-container .title, 
     .faq-container .title {
@@ -1588,8 +1682,11 @@ nav .nav-wrapper{
     .terms-wrapper .terms-list {
         font-size: 1.8rem;
     }
-    .quest-wrapper .quest {
-        font-size: 1.8rem;
+    .accordion-wrapper {
+        width: 100%;
+    }
+    .accordion-box .accordion-body p {
+        font-size: 1.5rem;
     }
     .terms-wrapper .img-box,
     .privacy-wrapper .img-box {
@@ -1603,6 +1700,20 @@ nav .nav-wrapper{
     .terms-wrapper .img-box,
     .privacy-wrapper .img-box {
         height: 20rem;
+    }
+    .terms-container, 
+    .privacy-container, 
+    .faq-container {
+        padding: 6rem 1rem;
+    }
+    .terms-container .terms-wrapper,
+    .privacy-container.privacy-wrapper,
+    .faq-container .faq-wrapper,
+    .accordion-box {
+        padding: 1rem;
+    }
+    .container {
+        padding: 1rem;
     }
 }
 /* end of footer modals */

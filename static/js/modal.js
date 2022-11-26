@@ -38,4 +38,21 @@ window.addEventListener("load", () => {
     privacyContainer.classList.remove("show")
   }
 
+  // faq accordion
+
+  const title = document.querySelectorAll(".accordion-box")
+
+  title.forEach((heading)=>{
+      const accordBtn = heading.querySelector(".acc-btn")
+      accordBtn.addEventListener("click", ()=>{
+          title.forEach((item)=>{
+              item.classList.toggle("show-text")
+              if(item !== heading){
+                  item.classList.remove("show-text")
+              }
+          })
+      })
+
+})
+
 });

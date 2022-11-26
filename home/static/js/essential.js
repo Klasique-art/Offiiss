@@ -43,7 +43,7 @@ window.addEventListener("load", () => {
     });
 
     function fetchData(page=1) {
-      fetch(`http://localhost:2000/blog/comment/?page=${page}&&post_id=${post_id}`)
+      fetch(`http://localhost:8000/comment/?page=${page}&&post_id=${post_id}`)
         .then((response) => {
           // check if there is no error in the response and return it
           if (!response.ok) {
@@ -96,7 +96,7 @@ window.addEventListener("load", () => {
           commentContCont.innerHTML = commentArr;
         })
         .catch((error) => {
-          alert("Error!", error);
+          alert("Error!", error.message);
         });
     }
     fetchData();

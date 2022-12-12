@@ -65,12 +65,11 @@ MIDDLEWARE = [
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 ROOT_URLCONF = 'imex_project.urls'
-<<<<<<< HEAD
+
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-=======
 import os
 
->>>>>>> 2cf455c9642c63415d90f7c4c18874b249b749d7
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

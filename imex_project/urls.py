@@ -24,7 +24,7 @@ path('', home_page, name='home'),
 path('privacy/', privacy, name='privacy'),
 path('terms/', terms, name='terms'),
 path('admin/', admin.site.urls),
-path('offis-api/', include('imex_app.urls')),
+path('offiiss/', include('imex_app.urls')),
     path('sitemap.xml', sitemap, # new
         {'sitemaps': maps},
         name='django.contrib.sitemaps.views.sitemap'),

@@ -43,7 +43,7 @@ def create_user(request):
             last_name = request.data.get('last_name')
             email = request.data.get('email')
             password = request.data.get('password')
-            if User.objects.filter(username=username).exists():
+            if User.objects.filter(username=username).exists() or User.objects.filter(email=email):
                 return Response({'status': "User already exists"}, status=status.HTTP_409_CONFLICT)
             else:
                 user = User.objects.create(email=email, password=make_password(password), first_name=first_name, last_name=last_name, username=username)
@@ -62,7 +62,7 @@ def create_agent(request):
             last_name = request.data.get('last_name')
             email = request.data.get('email')
             password = request.data.get('password')
-            if User.objects.filter(username=username).exists():
+            if User.objects.filter(username=username).exists() or User.objects.filter(email=email):
                 return Response({'status': "User already exists"}, status=status.HTTP_409_CONFLICT)
             else:
                 user = User.objects.create(email=email, password=make_password(password), first_name=first_name, last_name=last_name, username=username, is_active=True)

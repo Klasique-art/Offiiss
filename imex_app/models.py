@@ -21,6 +21,7 @@ class Profile(models.Model):
     user_type = models.PositiveSmallIntegerField(choices=((1, 'client'), (2, 'agent')), default=1)
     license = models.ImageField(upload_to='license', null=True, blank=True)
     agent_type = models.ForeignKey(AgentType, on_delete=models.CASCADE, related_name='agents', null=True, blank=True)
+    is_validated = models.BooleanField(default=True)
     company = models.CharField(max_length=200,null=True,blank=True)
     company_description = models.TextField(null=True,blank=True)
     company_location = models.CharField(max_length=200,null=True,blank=True)
@@ -60,4 +61,13 @@ class Order(models.Model):
     def __str__(self):
         # there is no such field as client_name or user in this model please take note
         return self.client.first_name + ' working with ' + self.agent.username + ' as an agent'
+
+
+class Code(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='code')
+    date_generated = models.DateTimeField(default=now)
+    expiring_date = models.DateTimeField()
+    unique_code = models.CharField(max_length=20)
+    def __str__(self):
+        return self.user.username
 

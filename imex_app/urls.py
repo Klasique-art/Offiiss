@@ -7,6 +7,7 @@ from rest_framework_simplejwt.views import (
 )
 from . api import ProfileView, ImageView
 from  .order import check_code, order, done
+from . import validate
 
 urlpatterns = [
 path('profile/<int:pk>/', ProfileView.as_view({"post": "update"}), name='profile'),
@@ -24,4 +25,7 @@ path('order/check-code/', check_code, name='check_code'),
 path('order/done/', done, name='order_done'),
 path("fetch-orders/", orders, name='orders'),
 path('order/', order, name='order'),
+path("generate/", validate.generate, name='generate'),
+path("validate-code/", validate.validate_code, name='validate_code'),
+path("reset/", validate.reset, name='reset'),
 ]

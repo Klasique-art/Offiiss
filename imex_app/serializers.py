@@ -8,8 +8,8 @@ class ProfileSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(required = False,)
     class Meta:
         model = Profile
-        fields = ['id', 'user', 'user_id', 'name', 'telephone_number', 'image', 'license', 'user_type', 'company', 'company_description', 'company_location',  'city', 'region', 'agent_type', 'agent_status']
-    
+        fields = ['id', 'user', 'user_id', 'name', 'telephone_number', 'image', 'license', 'user_type', 'company', 'company_description', 'company_location',  'city', 'region', 'agent_type', 'agent_status','is_sea_port','is_air_port']
+
 
 
 class ImageSerializer(serializers.ModelSerializer):

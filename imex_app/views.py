@@ -9,6 +9,7 @@ from rest_framework import status
 from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+from django.core.exceptions import ObjectDoesNotExist
 
 @api_view(['GET'])
 def agents(request):
@@ -21,17 +22,17 @@ def agents(request):
             agents = Profile.objects.filter(user_type = 2,agent_status = 3,is_air_port = True)
         paginate_obj = Paginator(agents, 10)
         results = paginate_obj.get_page(int(request.GET.get("page", 1)))
-        data = [{"agent_id": agent.user_id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.user.reviews.aggregate(Sum('rating'))['rating__sum']/agent.user.reviews.aggregate(Count('rating'))['rating__count'],'num_reviews':agent.user.reviews.aggregate(Count('rating'))['rating__count'], "city": agent.city, "region": agent.region, "company_location": agent.company_location,'image':agent.image.url,'is_air_port':agent.is_air_port,'is_sea_port':agent.is_sea_port} for agent in results]
+        data = [{"agent_user_id":agent.user_id, "agent_id": agent.id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.user.reviews.aggregate(Sum('rating'))['rating__sum'],'num_reviews':agent.user.reviews.aggregate(Count('rating'))['rating__count'], "city": agent.city, "region": agent.region, "company_location": agent.company_location,'image':agent.image.url,'is_air_port':agent.is_air_port,'is_sea_port':agent.is_sea_port} for agent in results]
         # data.append({"pagination_info": {"has_prev": results.has_previous(), "has_next": results.has_next(), "page_number": results.number,  "pages": paginate_obj.num_pages}})
         return Response({'objects':data,"pagination_info": {"has_prev": results.has_previous(), "has_next": results.has_next(), "page_number": results.number,  "pages": paginate_obj.num_pages}})
     else:
         agents = Profile.objects.filter(user_type = 2,agent_status = 3)[:request.GET.get('limit')]
         paginate_obj = Paginator(agents, 10)
         results = paginate_obj.get_page(int(request.GET.get("page", 1)))
-        data = [{"agent_id": agent.user_id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.user.reviews.aggregate(Sum('rating'))['rating__sum']/agent.user.reviews.aggregate(Count('rating'))['rating__count'],'num_reviews':agent.user.reviews.aggregate(Count('rating'))['rating__count'], "city": agent.city, "region": agent.region, "company_location": agent.company_location,'image':agent.image.url,'is_air_port':agent.is_air_port,'is_sea_port':agent.is_sea_port} for agent in results]
+        data = [{"agent_user_id":agent.user_id,"agent_id": agent.id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.user.reviews.aggregate(Sum('rating'))['rating__sum'],'num_reviews':agent.user.reviews.aggregate(Count('rating'))['rating__count'], "city": agent.city, "region": agent.region, "company_location": agent.company_location,'image':agent.image.url,'is_air_port':agent.is_air_port,'is_sea_port':agent.is_sea_port} for agent in results]
 
         # data.append({"pagination_info": {"has_prev": results.has_previous(), "has_next": results.has_next(), "page_number": results.number,  "pages": paginate_obj.num_pages}})
-#            data = [{"agent_id": agent.id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.reviews.aggregate(Sum('rating'))['rating__sum'], "city": agent.city, "region": agent.region, "company_location": agent.company_location} for agent in agents]            
+#            data = [{"agent_id": agent.id, "name": agent.name, "telephone_number": agent.telephone_number, "type": agent.agent_type.type, "company": agent.company, "company_description": agent.company_description, "rating": agent.reviews.aggregate(Sum('rating'))['rating__sum'], "city": agent.city, "region": agent.region, "company_location": agent.company_location} for agent in agents]
         return Response({'objects':data,"pagination_info": {"has_prev": results.has_previous(), "has_next": results.has_next(), "page_number": results.number,  "pages": paginate_obj.num_pages}})
 
 @api_view(['POST'])
@@ -47,8 +48,8 @@ def create_user(request):
                 return Response({'status': "User already exists"}, status=status.HTTP_409_CONFLICT)
             else:
                 user = User.objects.create(email=email, password=make_password(password), first_name=first_name, last_name=last_name, username=username)
-                Profile.objects.create(user=user,user_type = 1,name=user.first_name + ' ' + user.last_name)
-                return Response({"status": "Account created",})
+                user_profile = Profile.objects.create(user=user,user_type = 1,name=user.first_name + ' ' + user.last_name)
+                return Response({"status": "Account created","profile_id":user_profile.id})
         except Exception as e:
             return Response({'status': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 # api view to create a client
@@ -139,11 +140,21 @@ def reviews(request):
 @api_view(["GET"])
 def orders(request):
     # There is no field called user in order field and no telephone in user field
-    agent_id = request.GET.get("agent_id")    
+    agent_id = request.GET.get("agent_id")
     orders = Order.objects.filter(agent__pk=agent_id, is_done=False).all()
 # there should be date
-    data = [{"id":order.id,"client_name": f"{order.client.first_name} {order.client.last_name}", "date": order.date} for order in orders]
+    data = [{"id":order.id,"client_name": f"{order.client.first_name} {order.client.last_name}","is_done":order.is_done, "date": order.date} for order in orders]
     return Response(data)
+
+@api_view(["GET"])
+def get_order(request,agent_id,client_id):
+
+    try:
+        Order.objects.get(agent__pk=agent_id,client__pk=client_id,is_done=False)
+        return Response({"status": "Already exists"}, status=status.HTTP_451_UNAVAILABLE_FOR_LEGAL_REASONS)
+
+    except ObjectDoesNotExist:
+        return Response({"status": "Does not exist"})
 
 
 class MyTokenObtainPair(TokenObtainPairSerializer):
@@ -153,7 +164,8 @@ class MyTokenObtainPair(TokenObtainPairSerializer):
         # for k,v in serializer.items():
         # data[k] = v
         user_profile = Profile.objects.get(user = self.user)
-        data['id'] = user_profile.id
+        data['profile_id'] = user_profile.id
+        data['user_id'] = self.user.id
         data['username'] = self.user.username
         data['email'] = self.user.email
         data['first_name'] = self.user.first_name

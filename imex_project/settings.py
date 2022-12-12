@@ -65,7 +65,10 @@ MIDDLEWARE = [
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 ROOT_URLCONF = 'imex_project.urls'
+
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 import os
+
 
 TEMPLATES = [
     {

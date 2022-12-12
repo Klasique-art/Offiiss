@@ -6,10 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Bringing Clearing Agent
-    Offices in the Pockets 
-    of Importers and
-    Exporters Alike.
+    <meta name="description" content="Bringing Clearing Agent Offices in the Pockets of Importers and Exporters Alike.
      A cloud based Marketplace that revolutionizes the way importers and exporters interact with agents and transporters anytime anywhere, by using the latest in technology.">
     <title>Offiis {% block title %} {% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -137,14 +134,68 @@
     </button>
     <h1 class="title">faq</h1>
     <div class="faq-wrapper">
-        <div class="quest-wrapper">
-            <div class="quest">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.doloribus quaerat.</p>
+        <!-- accordion -->
+    <div class="container">
+        <div class="accordion-wrapper">
+            <!-- start -->
+            <div class="accordion-box" tabindex="0" data-aos="fade-up">
+                <div class="title-wrapper">
+                    <h5>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, totam?</h5>
+                    <button class="acc-btn" aria-label="open and close answer button">
+                        <span class="plus">
+                            <i class="far fa-plus-square"></i>
+                        </span>
+                        <span class="minus">
+                            <i class="far fa-minus-square"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="accordion-body" tabindex="0">
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam accusamus cumque iusto? Accusamus fuga, unde ratione minima distinctio consectetur, dolorum incidunt assumenda numquam consequatur suscipit facilis! Non neque voluptatum beatae?</p>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam accusamus cumque iusto? Accusamus fuga, unde ratione minima distinctio consectetur, dolorum incidunt assumenda numquam consequatur suscipit facilis! Non neque voluptatum beatae?</p>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam accusamus cumque iusto? Accusamus fuga, unde ratione minima distinctio consectetur, dolorum incidunt assumenda numquam consequatur suscipit facilis! Non neque voluptatum beatae?</p>
+                </div>
             </div>
-            <div class="ans">
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore neque animi, fuga cumque nihil ducimus fugiat voluptatum nisi dolor magnam! Similique cum distinctio ipsam neque quibusdam quasi repellendus qui eligendi!</p>
+            <!-- end -->
+            <!-- start -->
+            <div class="accordion-box" tabindex="0" data-aos="fade-up">
+                <div class="title-wrapper">
+                    <h5>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, totam?</h5>
+                    <button class="acc-btn" aria-label="open and close answer button">
+                        <span class="plus">
+                            <i class="far fa-plus-square"></i>
+                        </span>
+                        <span class="minus">
+                            <i class="far fa-minus-square"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="accordion-body" tabindex="0">
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam accusamus cumque iusto? Accusamus fuga, unde ratione minima distinctio consectetur, dolorum incidunt assumenda numquam consequatur suscipit facilis! Non neque voluptatum beatae?</p>
+                </div>
             </div>
+            <!-- end -->
+            <!-- start -->
+            <div class="accordion-box" tabindex="0" data-aos="fade-up">
+                <div class="title-wrapper">
+                    <h5>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, totam?</h5>
+                    <button class="acc-btn" aria-label="open and close answer button">
+                        <span class="plus">
+                            <i class="far fa-plus-square"></i>
+                        </span>
+                        <span class="minus">
+                            <i class="far fa-minus-square"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="accordion-body" tabindex="0">
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam accusamus cumque iusto? Accusamus fuga, unde ratione minima distinctio consectetur, dolorum incidunt assumenda numquam consequatur suscipit facilis! Non neque voluptatum beatae?</p>
+                </div>
+            </div>
+            <!-- end -->
         </div>
+    </div>
+ <!-- end of accordion -->
     </div>
 </div>
 <!-- end of faq -->
@@ -556,7 +607,7 @@ $("#email-sub").click((e) => {
         url: "{% url 'letter' %}",
         data: {email: email},
         success: (res) => {
-            $("#email").css("background", "red")
+            $("#email").val("")
             alert(res.message)
         }, error: (err) => {
         alert(err)
@@ -569,20 +620,6 @@ if ( window.history.replaceState ) {
 }
 
 window.addEventListener("load", () => {
-  // functionality of sidebar
-  const sidebarBtn = document.querySelector(".fixed-nav-btn");
-  const sidebar = document.querySelector(".nav-wrapper");
-
-  sidebarBtn.addEventListener("click", toggleSideBar);
-
-  function toggleSideBar() {
-    sidebar.classList.toggle("active");
-    if (sidebar.classList.contains("active")) {
-      sidebarBtn.innerHTML = "<i class='fas fa-times'></i>";
-    } else {
-      sidebarBtn.innerHTML = "<i class='fas fa-bars'></i>";
-    }
-  }
 
   // comment section
   const commentBox = document.querySelector("#comment");

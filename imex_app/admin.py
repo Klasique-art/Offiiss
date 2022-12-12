@@ -16,7 +16,7 @@ admin.site.register(Profile, ProfileAdmin)
 
 class ReviewAdmin(admin.ModelAdmin):
     model  = Review
-    list_display = ['agent', 'date', 'content', 'client']
+    list_display = ['agent','rating', 'date', 'content', 'client']
 
 admin.site.register(Review, ReviewAdmin)
 

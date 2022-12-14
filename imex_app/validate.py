@@ -24,7 +24,7 @@ def generate(request):
         code.unique_code = str(generate_code())
         code.expiring_date = DELTA + code.date_generated
         code.save()
-        send_mail("EMAIL ACCOUNT VERIFICATION CODE CONFIRMATION", f'Use the below code to verify your email address \n\r {code.unique_code}', fail_silently=True)
+        send_mail("EMAIL ACCOUNT VERIFICATION CODE CONFIRMATION", f'Use the below code to verify your email address \n\r {code.unique_code}', 'accountverification@offiiss.com', [email], fail_silently=True)
         return Response({"status": "ok"})
     return Response({"status": "error"}, status=status.HTTP_404_NOT_FOUND)
 @api_view(["POST"])

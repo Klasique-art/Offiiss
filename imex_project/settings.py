@@ -151,8 +151,9 @@ AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend',
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 465
-EMAIL_HOST_USER = 'eritten2@gmail.com'
-EMAIL_HOST_PASSWORD = 'GyauErittenKwame12345'
-EMAIL_USE_SSL = True
+EMAIL_HOST = 'mail.offiiss.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'accountverification@offiiss.com'
+EMAIL_HOST_PASSWORD = '3IdwGxfTVw'
+#EMAIL_USE_SSL = True
+

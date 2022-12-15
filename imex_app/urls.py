@@ -25,10 +25,16 @@ path('order/check-code/', check_code, name='check_code'),
 path('order/done/', done, name='order_done'),
 path("fetch-orders/", orders, name='orders'),
 path('order/', order, name='order'),
+<<<<<<< HEAD
 
+=======
+>>>>>>> 306242690eb90e26eb68b3536d076bff7ce6451c
 path("generate/", validate.generate, name='generate'),
 path("validate-code/", validate.validate_code, name='validate_code'),
 path("reset/", validate.reset, name='reset'),
 path('get-order/<int:agent_id>/<int:client_id>/', get_order, name='get_order'),
+<<<<<<< HEAD
 
+=======
+>>>>>>> 306242690eb90e26eb68b3536d076bff7ce6451c
 ]

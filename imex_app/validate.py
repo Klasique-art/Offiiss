@@ -9,7 +9,10 @@ from django.core.mail import send_mail
 from datetime import datetime
 import pytz
 
-DELTA = td(minutes=3)
+
+# specifying the time delta for the time interval
+
+DELTA = td(hours=1)
 
 def generate_code():
     gen = ss.SystemRandom()
@@ -28,7 +31,7 @@ def generate(request):
             code.expiring_date = DELTA + code.date_generated
             code.save()
 
-            send_mail("EMAIL ACCOUNT VERIFICATION CONFIRMATION CODE", f'Use the below code to verify your email address \n\r {code.unique_code}', 'accountverification@offiiss.com', [email], fail_silently=True)
+            send_mail("EMAIL ACCOUNT VERIFICATION CONFIRMATION CODE", f'Use the below code to verify your email address \n\r {code.unique_code} \r This code will expire in an hour time.', 'accountverification@offiiss.com', [email], fail_silently=True)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response({"status": "ok"})
@@ -43,6 +46,7 @@ def validate_code(request):
  
             user.is_validated=True
             user.save()
+            send_mail('Offiss Welcome message', 'Hello {user.user.first_name}, Your offiiss account has been validated', 'offiissapp@offiiss.com',  [], fail_silently=True)
             return Response({"status": "ok"})
         return Response({"status": "Code expired"}, status=status.HTTP_423_LOCKED)
     return Response({"status": "Invalid code"}	, status=status.HTTP_417_EXPECTATION_FAILED)

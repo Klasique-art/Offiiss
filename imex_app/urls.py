@@ -25,11 +25,10 @@ path('order/check-code/', check_code, name='check_code'),
 path('order/done/', done, name='order_done'),
 path("fetch-orders/", orders, name='orders'),
 path('order/', order, name='order'),
-<<<<<<< HEAD
+
 path("generate/", validate.generate, name='generate'),
 path("validate-code/", validate.validate_code, name='validate_code'),
 path("reset/", validate.reset, name='reset'),
-=======
 path('get-order/<int:agent_id>/<int:client_id>/', get_order, name='get_order'),
->>>>>>> a6ed431fff67ce45bc8b59cf154c3eee8a658ff0
+
 ]

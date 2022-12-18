@@ -95,6 +95,16 @@ def change_password(request):
         user.save()
         return Response({"status": "changed"})
 
+@api_view(['POST'])
+def reset_password(request):
+    if request.method == "POST":
+        user_email = request.data.get("email")
+        user = get_object_or_404(User, email=user_email)
+        password = request.data.get("password")
+        user.password = make_password(password)
+        user.save()
+        return Response({"status": "changed"})
+
 @api_view(["POST"])
 def change_username(request):
     if request.method == "POST":
@@ -174,6 +184,7 @@ class MyTokenObtainPair(TokenObtainPairSerializer):
         data['user_type'] = user_profile.get_user_type_display()
         data['image'] = user_profile.image.url
         data['agent_status'] = user_profile.get_agent_status_display()
+        data['is_email_validated'] = user_profile.is_validated
         return data
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPair

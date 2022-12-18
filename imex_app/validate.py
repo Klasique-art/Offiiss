@@ -39,11 +39,14 @@ def generate(request):
 @api_view(["POST"])
 def validate_code(request):
     code_number = request.data.get("code")
-    code = Code.objects.filter(unique_code=code_number)
+    print(code_number)
+    code = Code.objects.filter(unique_code=code_number)[0]
+    print(code)
+    
     if code:
         if datetime.now(tz=pytz.utc) < code.expiring_date:
-            user = Profile.objects.filter(user_id=code.user_id)[0]
- 
+            user = Profile.objects.get(user=code.user)
+            print(user)
             user.is_validated=True
             user.save()
             send_mail('Offiss Welcome message', 'Hello {user.user.first_name}, Your offiiss account has been validated', 'offiissapp@offiiss.com',  [], fail_silently=True)
@@ -58,6 +61,7 @@ def reset(request):
         code = Code.objects.filter(unique_code=code_number)
         if code:
             code = code[0]
+            
             if  datetime.now(tz=pytz.utc) < code.expiring_date:
                 return Response({"status": "ok"})
             return Response({"status": "Code expired"}, status=status.HTTP_423_LOCKED)

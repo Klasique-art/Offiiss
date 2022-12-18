@@ -1,5 +1,5 @@
 from django.urls import path
-from . views import MyTokenObtainPairView, agents,create_user,MyTokenObtainPair,reviews, create_agent, change_password, change_email, change_username, orders,get_order
+from . views import MyTokenObtainPairView, agents,create_user,MyTokenObtainPair,reviews, create_agent, change_password, change_email, change_username, orders,get_order,reset_password
 # from imex_app.api import ReviewResource as rr
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -25,12 +25,9 @@ path('order/check-code/', check_code, name='check_code'),
 path('order/done/', done, name='order_done'),
 path("fetch-orders/", orders, name='orders'),
 path('order/', order, name='order'),
-
-
-
 path("generate/", validate.generate, name='generate'),
 path("validate-code/", validate.validate_code, name='validate_code'),
 path("reset/", validate.reset, name='reset'),
 path('get-order/<int:agent_id>/<int:client_id>/', get_order, name='get_order'),
-
+path('reset-password/',reset_password,name='reset_password'),
 ]

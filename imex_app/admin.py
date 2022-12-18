@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Review, AgentType,Order
+from .models import Profile, Review, AgentType,Order,Code
 from django.db.models import Avg
 
 # Register your models here.
@@ -32,3 +32,9 @@ class OrderAdmin(admin.ModelAdmin):
     model = Order
     list_display = ['id','agent_id','client_id','code','is_done','code_active']
 admin.site.register(Order,OrderAdmin)
+
+
+class CodeAdmin(admin.ModelAdmin):
+    model = Code
+    list_display = ['user','unique_code','date_generated','expiring_date']
+admin.site.register(Code,CodeAdmin)

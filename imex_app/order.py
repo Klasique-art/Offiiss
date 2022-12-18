@@ -52,7 +52,7 @@ def done(request):
         order = get_object_or_404(Order, pk=order_id)
         order.code=generate(order.agent.username, order.client.username)
         order.save()
-    #        this is where request will be sent by mail or sms
+    #this is where request will be sent by mail or sms
         send_mail('Offiis review request', f'Please use the below code to review {order.agent.username}. \r' + str(order.code), [order.client.email], fail_silently=True)
         order.is_done=True;order.code_active=True
         order.save()

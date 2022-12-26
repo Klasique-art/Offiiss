@@ -7,11 +7,11 @@ from rest_framework import status
 from django.core.mail import send_mail
 from rest_framework.decorators import api_view
 
-def generate(x, y):
+def generate_code():
     gen = ss.SystemRandom()
-    code = gen.randint(1*1000, 100*6990594598454)
-    final = code*892289873473938
-    return x+str(final)+y
+    code = gen.randint(1*1000, 5000)
+    return code
+
 @api_view(['POST'])
 def order(request):
     if request.method == 'POST':
@@ -50,10 +50,10 @@ def done(request):
         #Also notice that there is no name field in user table
         order_id = request.data.get('order_id')
         order = get_object_or_404(Order, pk=order_id)
-        order.code=generate(order.agent.username, order.client.username)
+        order.code=generate_code()
         order.save()
     #this is where request will be sent by mail or sms
-        send_mail('Offiis review request', f'Please use the below code to review {order.agent.username}. \r' + str(order.code), [order.client.email], fail_silently=True)
+        send_mail('Offiis review request', f'Please use the below code to review {order.agent.username}. \r' + str(order.code), 'offiissapp@offiiss.com', [order.client.email], fail_silently=True)
         order.is_done=True;order.code_active=True
         order.save()
     return Response({"status": "Request sent"})

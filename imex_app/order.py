@@ -31,15 +31,15 @@ def check_code(request):
     # the code is going to be used to query the order to ensure simplicity
     code = request.data.get("code")
     order = get_object_or_404(Order, code=code)
-    print(code)
-    print(order.code_active)
+    # print(code)
+    # print(order.code_active)
     # We may not need this check if we are already able to query the order using the code
     # There is no such field in the order model as is_active we only have code_active
     if Order.objects.filter(code=code).exists():
         if order.is_done and order.code_active:
-            return Response({"status": "can review"}, status=status.HTTP_100_CONTINUE)
-        return Response({"status": "cannot review"},status=status.HTTP_103_EARLY_HINTS)
-    return Response({"status": "The code does not exist"}, status=status.HTTP_451_UNAVAILABLE_FOR_LEGAL_REASONS)
+            return Response({"detail": "can review"})
+        return Response({"detail": "cannot review"})
+    return Response({"detail": "The code does not exist"})
 
 @api_view(['POST'])
 def done(request):

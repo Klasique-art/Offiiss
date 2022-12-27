@@ -44,8 +44,11 @@ def create_user(request):
             last_name = request.data.get('last_name')
             email = request.data.get('email')
             password = request.data.get('password')
-            if User.objects.filter(username=username).exists() or User.objects.filter(email=email):
-                return Response({'status': "User already exists"}, status=status.HTTP_409_CONFLICT)
+            if User.objects.filter(username=username).exists():
+                return Response({'status': "A user with the specified username already exists"}, status=status.HTTP_409_CONFLICT)
+            if User.objects.filter(email=email).exists():
+                return Response({'status': "User with the specified Email already exists"}, status=status.HTTP_409_CONFLICT)
+
             else:
                 user = User.objects.create(email=email, password=make_password(password), first_name=first_name, last_name=last_name, username=username)
                 user_profile = Profile.objects.create(user=user,user_type = 1,name=user.first_name + ' ' + user.last_name)
@@ -63,8 +66,12 @@ def create_agent(request):
             last_name = request.data.get('last_name')
             email = request.data.get('email')
             password = request.data.get('password')
-            if User.objects.filter(username=username).exists() or User.objects.filter(email=email):
-                return Response({'status': "User already exists"}, status=status.HTTP_409_CONFLICT)
+            if User.objects.filter(username=username).exists():
+
+                return Response({'status': "User with the specified Username already exists"}, status=status.HTTP_409_CONFLICT)
+            if User.objects.filter(email=email).exists():
+                return Response({'status': "User with the specified Email already exists"}, status=status.HTTP_409_CONFLICT)
+
             else:
                 user = User.objects.create(email=email, password=make_password(password), first_name=first_name, last_name=last_name, username=username, is_active=True)
                 user_profile = Profile.objects.create(user=user, user_type=2,name=user.first_name + ' ' + user.last_name)

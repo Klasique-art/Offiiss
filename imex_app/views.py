@@ -192,6 +192,7 @@ class MyTokenObtainPair(TokenObtainPairSerializer):
         data['image'] = user_profile.image.url
         data['agent_status'] = user_profile.get_agent_status_display()
         data['is_email_validated'] = user_profile.is_validated
+        data['telephone_number'] = user_profile.telephone_number
         return data
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPair

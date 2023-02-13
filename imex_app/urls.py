@@ -4,7 +4,7 @@ from . views import MyTokenObtainPairView, agents,create_user,MyTokenObtainPair,
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
-)
+),
 from . api import ProfileView, ImageView
 from  .order import check_code, order, done
 from . import validate

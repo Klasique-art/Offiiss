@@ -17,15 +17,15 @@ path('tag/<slug:tag_slug>/', blog_views.tags, name='post_list_by_tag'),
 path('like/', blog_views.like, name='like'),
 path("comment/", blog_views.comment, name="comment"),
 path('detail/<int:pk>/<slug:slug>/', detail, name='detail'),
-    path('feed/', feeds.LatestPostsFeed(), name='feed'),
+path('feed/', feeds.LatestPostsFeed(), name='feed'),
 path('search/', search, name='search'),
 path('letter/', letter, name='letter'),
 path('', home_page, name='home'),
 path('privacy/', privacy, name='privacy'),
 path('terms/', terms, name='terms'),
 path('admin/', admin.site.urls),
-path('offiiss/', include('imex_app.urls')),
-    path('sitemap.xml', sitemap, # new
+path('sewonet_apis/offiiss_api/api_v1/', include('imex_app.urls'),),
+path('sitemap.xml', sitemap, # new
         {'sitemaps': maps},
         name='django.contrib.sitemaps.views.sitemap'),
 ]

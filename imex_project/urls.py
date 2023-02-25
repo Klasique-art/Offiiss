@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from home.views import terms, privacy
+from home.views import terms, privacy, read
 from home.blog_views import home_page, letter, search, detail
 from home import feeds
 from django.contrib.sitemaps.views import sitemap # new
@@ -22,6 +22,7 @@ path('search/', search, name='search'),
 path('letter/', letter, name='letter'),
 path('', home_page, name='home'),
 path('privacy/', privacy, name='privacy'),
+path('read/', read, name="security"),
 path('terms/', terms, name='terms'),
 path('admin/', admin.site.urls),
 path('sewonet_apis/offiiss_api/api_v1/', include('imex_app.urls'),),

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="security">
+    <h2 style="margin-bottom: 2rem;"><a href="{% url 'home' %}">Home</a></h2>
+    <div class="section-wrapper">
+        <h2 class="title">Saftey tips and security</h2>
+        <h4 class="sub-title">Identity Verification</h4>
+        <p>Our agents visit clearing agents at their offices and verify the identity of the clearing agent and transporter to ensure that they are who they claim to be. We do this  by requesting government-issued identification documents such as Ghana Cards, GPHA Access Card, Agency Card. Drivers Licences, Insurance etc.</p>
+        <h4 class="sub-title">Business Registration</h4>
+        <p>The Clearing Agent and Transporter should be registered as legal entities with the relevant government authorities. Offiiss registration agents verify this by requesting the registration certificate or other relevant documents.</p>
+        <h4 class="sub-title">Background Checks</h4>
+        <p>Conducting background checks on the clearing agent and transporter can help identify any criminal history or past fraudulent activity. As a marketplace app we perform these checks through third-party verification services.</p>
+        <h4 class="sub-title">References and Reviews Feature</h4>
+        <p> As marketplace app we encourage importers to use references from the clearing agent and transporter's previous clients and check their reviews on the app to verify their reliability and credibility.</p>
+        <h4 class="sub-title">Insurance and Licenses</h4>
+        <p>The clearing agent and particularly transporter should possess the necessary insurance and licenses required by law to provide their services. Offiiss verifies this by requesting proof of insurance and licenses.</p>
+        <h4 class="sub-title">Payment</h4>
+        <p> We urge importers to visit agents at their locations or offices for physical meet up before transaction and payment can be done. We take no liability for any payment. Never give in for any manipulation and coercion to make any payment without any due diligence on the part of users or importer</p>
+    </div>
+</section>
+{% endblock %}

@@ -12,3 +12,6 @@ def privacy(request):
 def terms(request):
     return render(request, 'terms.html')
 
+def read(request):
+    return render(request, 'security.html')
+

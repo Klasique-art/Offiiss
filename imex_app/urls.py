@@ -1,10 +1,7 @@
 from django.urls import path
 from . views import MyTokenObtainPairView, agents,create_user,MyTokenObtainPair,reviews, create_agent, change_password, change_email, change_username, orders,get_order,reset_password
 # from imex_app.api import ReviewResource as rr
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-),
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from . api import ProfileView, ImageView
 from  .order import check_code, order, done
 from . import validate

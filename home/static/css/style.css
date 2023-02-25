@@ -162,11 +162,7 @@ nav {
     margin-top: 2rem;
 }
 .header-wrapper .content-box {
-    /* flex: 1; */
     max-width: 450px;
-}
-.header-wrapper .content-img {
-    /* flex: 1; */
 }
 .header-wrapper .content-img img {
     width: 100%;

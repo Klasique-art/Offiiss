@@ -1,270 +1,235 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load tag %}
 {% block content %}
-{% if visit  %}
-<div class="wel-notice" role="alert">
-    <h4>Welcome back our user. Do not forget to download the offis app.</h4>
-</div>
-{% else %}
-<div class="wel-notice" role="alert">
-    <h1>Hello welcome to offis app home page. Download the app today.</h1>
-</div>
-{% endif %}
- <!-- header content -->
- <header>
-    <div class="header-content">
-        <div class="offet-border" data-aos="fade-right">
-            <div class="welcome-msg-box" data-aos="fade-left">
-                <h1 class="wel-msg">Offiis export / import</h1>
-                <p class="wel-p">Bringing Clearing Agent
-                    Offices in the Pockets 
-                    of Importers and
-                    Exporters Alike.
-                     A cloud based Marketplace that revolutionizes the way importers and exporters interact with agents and transporters anytime anywhere, by using the latest in technology.</p>
-                <h2>download app now</h2>
-                <div class="download-wrapper">
-                    <a href="#n" class="google-play-box">
-                        <i class="fab fa-google-play icon"></i>
-                        <div class="content-box">
-                            <p>get it on</p>
-                            <h4>google Play</h4>
-                        </div>
-                    </a>
-                    <a href="#n" class="app-store-box">
-                        <i class="fab fa-apple icon"></i>
-                        <div class="content-box">
-                            <p>get it on</p>
-                            <h4>app store</h4>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="img-box" data-aos="fade-left">
-            <img src="{% static 'img/header-img.jpg' %}" alt="image of mobile phone with offiis app opened">
-        </div>
+  <!-- header and nav -->
+  <header>
+    <nav>
+     <div class="nav-wrapper">
+         <div class="logo-box">
+             <img src="{% static 'img/logo.png' %}" alt="offiis logo">
+         </div>
+         <ul class="nav-list">
+             <li>
+                 <a href="#contact">contact us</a>
+             </li>
+             <li>
+                 <a href="#about">about</a>
+             </li>
+             <li>
+                 <a href="#security">safety tips</a>
+             </li>
+        </ul>
+     </div>
+    </nav>
+    <div class="header-wrapper">
+     <div class="content-wrapper">
+         <div class="content-box" data-aos="fade-left">
+             <h1>Get All Ports Clearing
+                Agents Offices in the
+                Pocket</h1>
+             <p>Easiest and meaningful way to connect with clearing agents and freight-forwarders in Tema port, Takoradi
+                port and Kotoka International Airport.
+                </p>
+             <div class="download-box">
+                 <a href="#n" aria-label="download from playstore">
+                     <img src="{% static 'img/playstore.png' %}" alt="">
+                 </a>
+                 <a href="#n"  aria-label="download from appstore">
+                     <img src="{% static 'img/appstore.png' %}" alt="">
+                 </a>
+             </div>
+         </div>
+         <div class="content-img" data-aos="fade-right" data-aos-delay="200">
+             <img src="{% static 'img/header.png' %}" alt="cartoon image of a young man smiling with a computer.">
+         </div>
+     </div>
     </div>
-    
 </header>
-<!-- end of header content -->
-<!-- about section  -->
-<section id="about">
+<div class="divider">
+    <p>Making connection between importers and clearing agents easier.</p>
+</div>
+<!-- hero section -->
+<section class=" hero hero-1" id="about">
     <div class="section-wrapper">
-        <div class="about-head" data-aos="fade-up">
-            <h3>ABOUT OFFIIS</h3>
-            <p class="big">Removing The Manual And Mundane From Clearing Agent-Importer Relationship</p>
-            <p>A cloud based Marketplace that revolutionizes the way importers and exporters interact with agents and transporters anytime anywhere, by using the latest in technology.
-            </p>
-        </div>
-        <div class="about-content-box">
+        <div class="hero-wrapper">
             <div class="img-box" data-aos="fade-left">
-                <img src="{% static 'img/about-img.jpg' %}" alt="">
+                <img src="{% static 'img/hero1.png' %}" alt="cartoon image">
             </div>
-            <div class="about-wrapper" data-aos="fade-right">
-                <div class="about-head" data-aos="fade-up">
-                    <h3>Our Values </h3>
-                </div>
-                <!-- start -->
-                <div class="about-box" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-check-circle icon"></i>
-                    <div class="text-box">
-                        <h4>Passion and Enthusiasm</h4>
-                        <p>We are passionate in trying to make the lives of property managers better by removing the manual and mundane from their extremely busy days.</p>
-                    </div>
-                </div>
-                <!-- end -->
-                <!-- start -->
-                <div class="about-box" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-check-circle icon"></i>
-                    <div class="text-box">
-                        <h4>All have a voice</h4>
-                        <p>The reason we have the best platform on the market is because our team and clients are invited to have a seat at the table to make the platform better for all. We listen because we care and want to build greatness.                        </p>
-                    </div>
-                </div>
-                <!-- end -->
-                <!-- start -->
-                <div class="about-box" data-aos="fade-up" data-aos-delay="300">
-                    <i class="fas fa-check-circle icon"></i>
-                    <div class="text-box">
-                        <h4>Transparency                        </h4>
-                        <p>We are an open book, we are honest and open with our clients and if we make mistakes we aim to fix them as soon as possible. We are not scared to try things that may not work out, but we will tell you when they don't.
-                        </p>
-                    </div>
-                </div>
-                <!-- end -->
-                <!-- start -->
-                <div class="about-box" data-aos="fade-up" data-aos-delay="400">
-                    <i class="fas fa-check-circle icon"></i>
-                    <div class="text-box">
-                        <h4>Technology                        </h4>
-                        <p>Technology and innovation is at the core of what we do. We invest heavily in our technology, so the evolution of the platform is unmatched by others. We love to delight customers.
-                        </p>
-                    </div>
-                </div>
-                <!-- end -->
+            <div class="content-box" data-aos="fade-right" data-aos-delay="200">
+                <h2>Instantly Call or Text  Every
+                    Clearing Agent From the 
+                    Offiiss App
+                    </h2>
+                <p>Like never before we have removed the mundane in the way you connect with clearing agents to save time and money whiles you attend to most the important things</p>
             </div>
         </div>
     </div>
 </section>
-<!-- end of about section  -->
-<!-- app features -->
-<section id="features">
+<section class="hero hero-2">
     <div class="section-wrapper">
-        <div class="feat-head" data-aos="fade-up">
-            <h3>app features</h3>
-            <p>Our app has quite simple yet powerful features to help you access your agents and transporters for a clean service.</p>
-        </div>
-        <div class="feat-wrapper">
-            <div class="detail-wrapper detail-1" data-aos="fade-right">
-                <div class="detail-box">
-                    <i class="fas fa-box-open icon"></i>
-                    <h4>simple features</h4>
-                    <p>The features of our app is simple and easy to use.</p>
-                </div>
-                <div class="detail-box">
-                    <i class="fas fa-drafting-compass icon"></i>
-                    <h4>simple design</h4>
-                    <p>Our app interface is simple so you can use without difficulty.</p>
-                </div>
+        <div class="hero-wrapper">
+            <div class="content-box" data-aos="fade-right">
+                <h2>Message to Book for All Types of Vehicle On the Go</h2>
+                <p>Instantly call and chat with your next agent, trailer driver and ask for a quote, duty estimate, 
+                    transportation cost, book an appointment
+                    and get the conversation going with prospective clearing agents.
+                    </p>
+                <button class="all-btn coming">coming soon</button>
             </div>
-            <div class="img-box" data-aos="zoom-out">
-                <img src="{% static 'img/features.jpg' %}" alt="">
-            </div>
-            <div class="detail-wrapper detail-2" data-aos="fade-left">
-                <div class="detail-box">
-                    <i class="fas fa-mobile-alt icon"></i>
-                    <h4>ios & android version</h4>
-                    <p>Available on both most popular mobile OS platforms. Download our app on your android or IOS device.</p>
-                </div>
-
-                <div class="detail-box">
-                    <i class="fas fa-user-tie icon"></i>
-                    <h4>24/7 support by real people</h4>
-                    <p>We attend to your messages within 24 hours. Actual people will respond to your concerns.</p>
-                </div>
+            <div class="img-box" data-aos="fade-left" data-aos-delay="200">
+                <img src="{% static 'img/hero2.png' %}" alt="">
             </div>
         </div>
     </div>
 </section>
-<!-- end of app features -->
-<!-- app interface -->
-<section class="app-interface" id="appInter">
+<section class="hero hero-2">
+    <div class="review-divider" data-aos="fade-up">
+        <button>
+            <i class="fas fa-star"></i>
+        </button>
+        <h4>Review your agent and trailer driver.</h4>
+        <button>
+            <i class="fas fa-star"></i>
+        </button>
+    </div>
     <div class="section-wrapper">
-        <div class="inter-head" data-aos="fade-up">
-            <h3>Easily and Securely Connect With Agents 
-                and Transporters.
-                </h3>
-            <p>Instantly call and chat with your next agent,trailer 
-                driver and ask for a quote, duty estimate, transportation cost,
-                 book an appointment and get the conversation going with prospective clearing agents and Transporters.
-                  </p>
-        </div>
-        <div class="slide-container swiper" data-aos="fade-up">
-            <div class="slide-content">
-                <div class="card-wrapper swiper-wrapper">
-                    <div class="img-box swiper-slide">
-                        <img src="{% static 'img/app-inter-1.jpg' %}" alt="">
-                    </div>
-                    <div class="img-box swiper-slide">
-                        <img src="{% static 'img/app-inter-2.jpg' %}" alt="">
-                    </div>
-                    <div class="img-box swiper-slide">
-                        <img src="{% static 'img/app-inter-3.jpg' %}" alt="">
-                    </div>
-                    <div class="img-box swiper-slide">
-                        <img src="{% static 'img/features.jpg' %}" alt="">
-                    </div>
-                </div>
+        <div class="hero-wrapper">
+            <div class="img-box" data-aos="fade-up" data-aos-delay="200">
+                <img src="{% static 'img/hero3.png' %}" alt="cartoon image">
             </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
+            <div class="content-box" data-aos="fade-up" data-aos-delay="300">
+                <h2>Rate and Comment On Your Agent's 
+                    Clearing Experience. Other Importers
+                    Need to Know.
+                    </h2>
+                <p>For Offiiss app, importers and exporters are now able to have 
+                    a voice that gives them absolute control by
+                    sharing how they feel about their agents' performance to 
+                    the public. This helps improve the quality
+                    of service of agents.
+                    </p>
+            </div>
         </div>
     </div>
 </section>
-<!-- end of app interface -->
-<!-- end of demo -->
-<section id="demo">
+<!-- end of hero section -->
+<!-- values section -->
+<section class="values">
+    <h2>our values</h2>
     <div class="section-wrapper">
-        <div class="demo-head feat-head" data-aos="fade-up">
-            <h3>a guide to the app perfectly</h3>
-            <p>Because we truly care about your safety and trust we make sure the platform is built solely for    customs certified clearing agents and freight forwarders. Agents and transporters are taken through a rigorous identification and verification process before their profiles get activated on the platform.                                       </p>
-        </div>
-    </div>
-    <!-- video box -->
-    <div class="video-box" data-aos="fade-up" tabindex="0">
-        <video src="{% static 'img/demo-vid.mp4' %}" loop>Your browser does not support video tag</video>
-        <div class="vid-overlay">
-            <button class="play-btn play" aria-label="video play or pause button">
-                <i class="fas fa-play"></i>
-            </button>
-        </div>
-    </div>
-</section>
-<!-- demo -->
-<!-- blog -->
-
-<section id="blog">
-    <div class="section-wrapper">
-        <div class="blog-head feat-head" data-aos="fade-up">
-            <h3>our recent articles</h3>
-            <p>Rate and Comment on your agent's clearing experience. 
-                More than ever importers and exporters are able to have a voice that gives them absolute control by sharing how they felt about their agents' performance to the public. This helps improve the quality service of agents.
+        <div class="values-wrapper">
+            <!-- start -->
+            <div class="box" data-aos="fade-up" data-aos-delay="100">
+                <h4>Passion and Enthusiasm
+                </h4>
+                <p>We are passionate in trying to make the lives of property managers better by removing the manual and mundane from their extremely busy days.
                 </p>
             </div>
-            <div class="tags">
-                <h1 class="section-title" style="margin-bottom: 2rem;" data-aos="fade-up"><span>tags</span></h1>
-                <div class="tags-wrapper">
-                    {% for tag in tags %}
-                    <li class="tag-list" data-aos="fade-up" data-aos-delay="200">
-                        <a href="{% url 'post_list_by_tag' tag.slug %}" aria-label="{{ tag.name }} category">
-                            {{ tag.name }}
-                        </a>
-                    </li>
-                        {% endfor %}
-                </div>
+            <!-- end -->
+            <!-- start -->
+            <div class="box" data-aos="fade-up" data-aos-delay="200">
+                <h4>All have a voice
+                </h4>
+                <p>The reason we have the best platform on the market is because our team and clients are invited to have a seat at the table to make the platform better for all. We listen because we care and want to build greatness.
+
+                </p>
             </div>
-        <div class="blog-wrapper">
-            <!-- start of blog -->
-            {% for post in recent %}
-            <div class="blog-card" tabindex="0" data-aos="fade-up">
-                <div class="img-box" aria-label="blog image">
-                    <img src=" {{post.image.url}}" alt=" {{post.title}}">
-                </div>
-                <div class="content-box">
-                    <p class="date" aria-label="date {{post.created_on}}">published {{post.created_on|ago}}</p>
-                    <p class="title" aria-label="blog title">{{post.title|markdown|truncatewords_html:15}}</p>
-                    <p class="text">{{ post.text|markdown|truncatewords_html:20 }}</p>
-                    <a href="{{post.get_absolute_url}}" class="read-more-btn">
-                        read more</a>
-                </div>
+            <!-- end -->
+            <!-- start -->
+            <div class="box" data-aos="fade-up" data-aos-delay="300">
+                <h4>Transparency
+                </h4>
+                <p>We are an open book, we are honest and open with our clients and if we make mistakes we aim to fix them as soon as possible. We are not scared to try things that may not work out, but we will tell you when they don't.
+                </p>
             </div>
-            {% endfor %}          
-            <!-- end of blog -->
+            <!-- end -->
+            <!-- start -->
+            <div class="box" data-aos="fade-up" data-aos-delay="400">
+                <h4>Technology
+                </h4>
+                <p>Technology and innovation is at the core of what we do. We invest heavily in our technology, so the evolution of the platform is unmatched by others. We love to delight customers. 
+
+                </p>
+            </div>
+            <!-- end -->
         </div>
     </div>
 </section>
-<!-- end of blog -->
-<!-- contact form -->
-<section class="contact-section">
+<!-- end of values section -->
+<!-- testimonial section -->
+<section class="testimonial">
     <div class="section-wrapper">
-        <div class="feat-head" data-aos="fade-up">
-            <h3>contact us</h3>
-            <p>send us a message concerning our services and we will reply within 24 hours.
-                </p>
+        <h2 class="title">what other's have to say</h2>
+        <div class="testimonial-wrapper">
+            <!-- start -->
+            <div class="box" data-aos="fade-up" data-aos-delay="100" tabindex="0">
+                <div class="up">
+                    <div class="img-box">
+                        <img src="{% static 'img/pic/pic1.png' %}" alt="Person image">
+                    </div>
+                    <h4 class="name">Diego Fullam.</h4>
+                    <h5 class="job">CEO</h5>
+                </div>
+                <p class="msg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque architecto nemo nulla expedita, officia voluptatem enim, voluptatum quidem quod, nostrum ipsa laudantium molestias obcaecati illum maxime cupiditate suscipit ab laborum?</p>
             </div>
-        <form action="/" class="contact-form">
-            <input type="text" placeholder="enter your name" name="name" required>
-            <input type="email" name="email" placeholder="enter your email" required>
-            <textarea name="message" placeholder="enter your message" required></textarea>
-            <input type="submit" value="send" aria-label="send message">
-        </form>
+            <!-- end -->
+            <!-- start -->
+            <div class="box" data-aos="fade-up" data-aos-delay="200" tabindex="0">
+                <div class="up">
+                    <div class="img-box">
+                        <img src="{% static 'img/pic/pic2.jpg' %}" alt="Person image">
+                    </div>
+                    <h4 class="name">Diego Fullam.</h4>
+                    <h5 class="job">software developer.</h5>
+                </div>
+                <p class="msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt illum dolore rem velit omnis, iure sapiente sit alias ab totam commodi obcaecati dicta dolorem repellat labore quas distinctio non iusto!</p>
+            </div>
+            <!-- end -->
+            <!-- start -->
+            <div class="box" data-aos="fade-up" data-aos-delay="300" tabindex="0">
+                <div class="up">
+                    <div class="img-box">
+                        <img src="{% static 'img/pic/pic3.jpg' %}" alt="Person image">
+                    </div>
+                    <h4 class="name">Diego Fullam.</h4>
+                    <h5 class="job">Technician.</h5>
+                </div>
+                <p class="msg">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore quaerat sequi, ex atque corrupti laborum accusantium eum, ipsum placeat repellendus nam numquam reprehenderit blanditiis a, obcaecati tenetur aliquam omnis. Voluptate!</p>
+            </div>
+            <!-- end -->
+        </div>
     </div>
 </section>
+<!-- end of testimonial section -->
+<!-- contact section -->
+<section class="contact" id="contact">
+    <div class="section-wrapper">
+        <div class="contact-form">
+            <h4 style="text-transform: uppercase;">contact us</h4>
+            <form action="#">
+                <input type="text" placeholder="name" data-aos="fade-up" data-aos-delay="100">
+                <input type="text" placeholder="email" data-aos="fade-up" data-aos-delay="200">
+                <textarea placeholder="message" data-aos="fade-up" data-aos-delay="300"></textarea>
+                <input type="submit" value="send" data-aos="fade-up" data-aos-delay="400">
+            </form>
+        </div>
+    </div>
+</section>
+<!-- end of contact section -->
+<!-- text section -->
+<section class="text" id="security">
+    <div class="section-wrapper" >
+        <h2>Securely Removing The Manual And Mundane By Connecting Everyone In The Clearing and Freight Forwarding Process.</h2>
+        <p>  Because we truly care about your safety and trust we make sure the platform is built solely for customs certified clearing agents and freight forwarders. Agents and transporters are taken through a rigorous identification and verification process before their profiles get activated on the platform.</p>
+        <a href="{% url 'security' %}" class="all-btn">read more</a>
+    </div>
+</section>
+<!-- end of text text section-->
+<!-- secure img -->
+<div class="secure-img">
+    <img src="{% static 'img/secure.jpg' %}" alt="cartoon image">
+    <div class="overlay"></div>
+</div>
+<!-- end of secure img -->
 
-<!-- end of contact form -->
-
- 
 {% endblock %}

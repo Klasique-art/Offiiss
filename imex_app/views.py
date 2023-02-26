@@ -167,7 +167,7 @@ def orders(request):
 def get_order(request,agent_id,client_id):
 
     try:
-        Order.objects.get(agent__pk=agent_id,client__pk=client_id,is_done=False)
+        Order.objects.get(agent__pk=agent_id,client__pk=client_id,is_done=True)
         return Response({"status": "Already exists"}, status=status.HTTP_451_UNAVAILABLE_FOR_LEGAL_REASONS)
 
     except ObjectDoesNotExist:
@@ -192,6 +192,7 @@ class MyTokenObtainPair(TokenObtainPairSerializer):
         data['image'] = user_profile.image.url
         data['agent_status'] = user_profile.get_agent_status_display()
         data['is_email_validated'] = user_profile.is_validated
+        data['telephone_number'] = user_profile.telephone_number
         return data
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPair

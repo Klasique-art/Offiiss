@@ -446,7 +446,8 @@ form input[type="submit"] {
         font-size: 1.6rem;
     }
     .hero-wrapper .img-box {
-        display: none;
+        width: 100%;
+        height: 25rem;
     }
     .review-divider,
     section {

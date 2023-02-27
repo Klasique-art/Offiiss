@@ -363,7 +363,7 @@ nav {
 }
 .testimonial .title {
     text-align: center;
-    text-transform: uppercase;
+    text-transform: capitalize;
     color: var(--blue);
 }
 .testimonial-wrapper .box {

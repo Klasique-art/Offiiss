@@ -155,9 +155,10 @@ nav {
     width: 100%;
     height: 100%;
     display: flex;
+    height: calc(100vh - 170px);
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 4rem;
 }
 .header-wrapper .content-wrapper {
     display: flex;
@@ -213,7 +214,7 @@ nav {
     }
     .header-wrapper {
         flex-direction: column;
-        height: calc(100vh - 180px);
+        /* height: calc(100vh - 180px); */
         overflow: hidden;
         gap: 1rem;
     }
@@ -243,7 +244,8 @@ nav {
     color: var(--black);
     background: var(--grayLight);
     text-align: center;
-    font-size: 2rem;
+    font-size: 3rem;
+    text-transform: uppercase;
     font-weight: bold;
     font-family: outfit;
     padding: 2rem;
@@ -405,7 +407,7 @@ nav {
     margin: 0 auto;
 }
 .testimonial-wrapper .box .up {
-    background-color: var(--bluel);
+    background-color: var(--blueLight);
     color: var(--white);
     padding: 1rem;
     text-align: center;

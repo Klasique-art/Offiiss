@@ -270,7 +270,7 @@ nav {
 .hero-wrapper .img-box img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    /* object-fit: cover; */
 }
 .hero-wrapper h2 {
     margin-bottom: 1rem;
@@ -481,7 +481,7 @@ form input[type="submit"] {
     }
     .hero-wrapper .img-box {
         width: 100%;
-        height: 25rem;
+        height: 35rem;
     }
     .download-box {
         width: 100%;

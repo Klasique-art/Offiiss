@@ -316,6 +316,9 @@ nav {
     .hero-wrapper h2 {
         font-size: 1.8rem;
     }
+    .hero-2 .hero-wrapper {
+        flex-direction: column-reverse;
+    }
 }
 /* end of hero section */
 .review-divider {
@@ -478,7 +481,7 @@ form input[type="submit"] {
         left: 0;
         width: 100%;
         max-height: none;
-        max-height: 270px;
+        max-height: 220px;
     }
     .hero-wrapper .img-box {
         width: 100%;
@@ -511,6 +514,23 @@ form input[type="submit"] {
     }
     .text h2 + p {
         font-size: 1.6rem;
+    }
+    .header-wrapper .content-box {
+        text-align: center;
+    }
+}
+@media (max-width: 350px) {
+    .logo-box {
+        width: 80px;
+    }
+    .header-wrapper .content-wrapper h1 {
+        font-size: 2.5rem;
+    }
+    .header-wrapper .content-img {
+        max-height: 200px;
+    }
+    .download-box a {
+        width: 15rem;
     }
 }
 /* values */

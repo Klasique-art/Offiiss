@@ -44,13 +44,15 @@ def create_user(request):
             last_name = request.data.get('last_name')
             email = request.data.get('email')
             password = request.data.get('password')
+            telephone_number = request.data.get('telephone_number')
+
             if User.objects.filter(username=username).exists():
                 return Response({'status': "A user with the specified username already exists"}, status=status.HTTP_409_CONFLICT)
             if User.objects.filter(email=email).exists():
                 return Response({'status': "User with the specified Email already exists"}, status=status.HTTP_409_CONFLICT)
 
             else:
-                user = User.objects.create(email=email, password=make_password(password), first_name=first_name, last_name=last_name, username=username)
+                user = User.objects.create(email=email, password=make_password(password), first_name=first_name, last_name=last_name, username=username,telephone_number = telephone_number)
                 user_profile = Profile.objects.create(user=user,user_type = 1,name=user.first_name + ' ' + user.last_name)
                 return Response({"status": "Account created","profile_id":user_profile.id})
         except Exception as e:

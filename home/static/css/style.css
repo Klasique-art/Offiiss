@@ -478,6 +478,7 @@ form input[type="submit"] {
         left: 0;
         width: 100%;
         max-height: none;
+        max-height: 270px;
     }
     .hero-wrapper .img-box {
         width: 100%;

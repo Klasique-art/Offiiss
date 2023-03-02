@@ -5,6 +5,7 @@
     --gray: rgba(27, 25, 25, 0.7);
     --grayLight: rgb(218, 213, 213);
     --blue: rgb(0, 0, 52);
+    --bluel: rgb(0, 0, 52, .6);
     --lightorange: rgba(244, 133, 59,.5);
     --lightBlue: #8482cf;
     --blueLight: rgba(164, 164, 251, .5);
@@ -137,7 +138,6 @@ nav {
 .nav-list a {
     font-size: 2.5rem;
     color: var(--white);
-    text-transform: capitalize;
     font-weight: bold;
     font-family: roboto, sans-serif;
     transition: .4s;
@@ -152,6 +152,12 @@ nav {
 }
 .header-wrapper {
     width: 100%;
+    height: 100%;
+    display: flex;
+    height: calc(100vh - 170px);
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
 }
 .header-wrapper .content-wrapper {
     display: flex;
@@ -163,6 +169,11 @@ nav {
 }
 .header-wrapper .content-box {
     max-width: 450px;
+}
+.header-wrapper .content-img {
+    max-width: 400px;
+    max-height: 400px;
+    overflow: hidden;
 }
 .header-wrapper .content-img img {
     width: 100%;
@@ -190,7 +201,7 @@ nav {
 
 @media (max-width: 768px) {
     .logo-box {
-        width: 90px;
+        width: 130px;
         border-radius: 0;
     }
     .logo-box img {
@@ -199,12 +210,15 @@ nav {
     .nav-list a {
         font-size: 1.8rem;
     }
+    .header-wrapper {
+        flex-direction: column;
+        /* height: calc(100vh - 180px); */
+        overflow: hidden;
+        gap: 1rem;
+    }
     .header-wrapper .content-wrapper {
         flex-direction: column;
         height: 100%;
-    }
-    .header-wrapper .content-img {
-        display: none;
     }
     .header-wrapper .content-box {
         width: 100%;
@@ -212,8 +226,13 @@ nav {
         padding: 2rem;
         margin-top: 5rem;
     }
+    .header-wrapper .content-img {
+        width: 100%;
+        max-width: none;
+        max-height: 300px;
+    }
     .header-wrapper .content-wrapper h1 {
-        font-size: 2rem;
+        font-size: 3rem;
     }
 }
 
@@ -223,7 +242,8 @@ nav {
     color: var(--black);
     background: var(--grayLight);
     text-align: center;
-    font-size: 2rem;
+    font-size: 3rem;
+    text-transform: uppercase;
     font-weight: bold;
     font-family: outfit;
     padding: 2rem;
@@ -250,7 +270,7 @@ nav {
 .hero-wrapper .img-box img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    /* object-fit: cover; */
 }
 .hero-wrapper h2 {
     margin-bottom: 1rem;
@@ -363,7 +383,7 @@ nav {
 }
 .testimonial .title {
     text-align: center;
-    text-transform: uppercase;
+    text-transform: capitalize;
     color: var(--blue);
 }
 .testimonial-wrapper .box {
@@ -385,7 +405,7 @@ nav {
     margin: 0 auto;
 }
 .testimonial-wrapper .box .up {
-    background-color: var(--blue);
+    background-color: var(--blueLight);
     color: var(--white);
     padding: 1rem;
     text-align: center;
@@ -434,19 +454,48 @@ form input[type="submit"] {
         gap: 1rem;
     }
     nav {
-        padding: 1rem 2rem;
+        padding: 1rem 0;
     }
     .nav-list a {
         font-size: 1.5rem;
     }
     .logo-box {
-        width: 60px;
+        width: 100px;
     }
     .divider {
         font-size: 1.6rem;
     }
+    header {
+        overflow: hidden;
+    }
+    .header-wrapper {
+        position: relative;
+        height: calc(100vh - 56px);
+    }
+    .header-wrapper .content-img {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        max-height: none;
+    }
     .hero-wrapper .img-box {
-        display: none;
+        width: 100%;
+        height: 35rem;
+    }
+    .download-box {
+        width: 100%;
+        margin-top: 2rem;
+    }
+    .download-box a {
+        width: 20rem;
+    }
+    .download-box a img {
+        width: 100%;
+        height: 100%;
+    }
+    .header-wrapper .content-wrapper h1 {
+        font-size: 4rem;
     }
     .review-divider,
     section {
@@ -496,6 +545,9 @@ form input[type="submit"] {
 @media (max-width: 480px) {
     .values-wrapper .box {
         width: 100%;
+    }
+    footer .footer-links a {
+        margin-bottom: 1rem;
     }
 }
 /* end of values */

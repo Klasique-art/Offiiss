@@ -104,6 +104,7 @@ body {
     overflow-x: hidden;
     font-family: roboto, "Helvetica Neue", sans-serif;
     font-size: 1.8rem;
+    background: green;
 }
 /* header and nav */
 header {

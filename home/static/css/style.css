@@ -572,6 +572,7 @@ form input[type="submit"] {
 .terms p,
 .privacy p {
     margin-top: 1rem;
+    position: relative;
 }
 /* end of terms and privacy */
 /* footer */

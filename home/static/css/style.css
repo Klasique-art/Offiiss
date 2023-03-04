@@ -104,16 +104,13 @@ body {
     overflow-x: hidden;
     font-family: roboto, "Helvetica Neue", sans-serif;
     font-size: 1.8rem;
-    background: green;
 }
 /* header and nav */
 header {
     height: 100vh;
     background: var(--blue);
     padding: 1rem;
-}
-nav {
-    padding: 2rem 4rem;
+    overflow: hidden;
 }
 .nav-wrapper {
     display: flex;
@@ -125,6 +122,7 @@ nav {
     height: auto;
     border-radius: 6px;
     overflow: hidden;
+    border: 1px solid white;
 }
 .logo-box img {
     width: 100%;
@@ -134,7 +132,7 @@ nav {
 .nav-list {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 3rem;
 }
 .nav-list a {
     font-size: 2.5rem;
@@ -152,54 +150,40 @@ nav {
     color: var(--lightBlue);
 }
 .header-wrapper {
-    width: 100%;
     height: 100%;
     display: flex;
-    height: calc(100vh - 170px);
     justify-content: center;
     align-items: center;
-    gap: 4rem;
 }
 .header-wrapper .content-wrapper {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
+}
+.header-wrapper .content-box h1 {
+    margin-bottom: 1rem;
     color: var(--white);
-    margin-top: 2rem;
-}
-.header-wrapper .content-box {
-    max-width: 450px;
-}
-.header-wrapper .content-img {
-    max-width: 400px;
-    max-height: 400px;
-    overflow: hidden;
-}
-.header-wrapper .content-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.header-wrapper .content-wrapper h1 {
     font-size: 3.5rem;
-    font-family: outfit;
-    margin-bottom: 1rem;
+    text-transform: capitalize;
 }
-.header-wrapper .content-wrapper p {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    line-height: 1.5;
-    font-weight: normal;
+.header-wrapper .content-box p {
     color: var(--white2);
+    margin-bottom: 2rem;
 }
-.download-box {
+.header-wrapper .download-box {
     display: flex;
     align-items: center;
     gap: 2rem;
-    width: 50%;
+} 
+.header-wrapper .download-box a {
+    width: 15rem;
 }
-
+.header-wrapper .download-box img {
+    height: 100%;
+    width: 100%;
+}
 @media (max-width: 768px) {
     .logo-box {
         width: 130px;
@@ -212,31 +196,43 @@ nav {
         font-size: 1.8rem;
     }
     .header-wrapper {
-        flex-direction: column;
-        /* height: calc(100vh - 180px); */
-        overflow: hidden;
-        gap: 1rem;
+        padding-top: 5rem;
     }
     .header-wrapper .content-wrapper {
         flex-direction: column;
-        height: 100%;
+        overflow: hidden;
+        gap: 4rem;
     }
+    
     .header-wrapper .content-box {
-        width: 100%;
-        max-width: none;
-        padding: 2rem;
-        margin-top: 5rem;
+        text-align: center;
     }
     .header-wrapper .content-img {
         width: 100%;
-        max-width: none;
-        max-height: 300px;
+        height: 45rem;
     }
-    .header-wrapper .content-wrapper h1 {
-        font-size: 3rem;
+    .header-wrapper .content-img img {
+        width: 100%;
+        height: 100%;
+    }
+    .header-wrapper .download-box a {
+        width: 20rem;
     }
 }
-
+@media (max-width: 480px) {
+    .header-wrapper .content-box h1 {
+        font-size: 2.5rem;
+    }
+    .header-wrapper .content-box p {
+        font-size: 1.5rem;
+    }
+    .header-wrapper .download-box a {
+        width: 12rem;
+    }
+    .header-wrapper .download-box {
+        justify-content: center;
+    }
+}
 /* end of header and nav */
 .divider {
     width: 100%;
@@ -260,6 +256,12 @@ nav {
     gap: 2rem;
     padding-top: 2rem;
     padding-bottom: 2rem;
+}
+.hero h2 {
+    text-transform: capitalize;
+    font-size: 2.7rem;
+    font-weight: bold;
+    color: var(--blue);
 }
 .hero-wrapper .content-box {
     padding: 1rem;
@@ -315,7 +317,7 @@ nav {
         font-size: 1.6rem;
     }
     .hero-wrapper h2 {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
     }
     .hero-2 .hero-wrapper {
         flex-direction: column-reverse;
@@ -351,6 +353,9 @@ nav {
     margin-bottom: 2rem;
     text-align: center;
     font-weight: normal;
+    font-size: 2.5rem;
+    color: var(--blue);
+    font-weight: bold;
 }
 .text p {
     margin-bottom: 2rem;
@@ -389,6 +394,7 @@ nav {
     text-align: center;
     text-transform: capitalize;
     color: var(--blue);
+    font-size: 2.5rem;
 }
 .testimonial-wrapper .box {
     width: 20rem;
@@ -472,18 +478,6 @@ form input[type="submit"] {
     header {
         overflow: hidden;
     }
-    .header-wrapper {
-        position: relative;
-        height: calc(100vh - 56px);
-    }
-    .header-wrapper .content-img {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        max-height: none;
-        max-height: 220px;
-    }
     .hero-wrapper .img-box {
         width: 100%;
         height: 35rem;
@@ -499,9 +493,6 @@ form input[type="submit"] {
         width: 100%;
         height: 100%;
     }
-    .header-wrapper .content-wrapper h1 {
-        font-size: 4rem;
-    }
     .review-divider,
     section {
         padding: 1rem;
@@ -511,27 +502,15 @@ form input[type="submit"] {
         max-width: none;
     }
     .text h2 {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
     }
     .text h2 + p {
         font-size: 1.6rem;
-    }
-    .header-wrapper .content-box {
-        text-align: center;
     }
 }
 @media (max-width: 350px) {
     .logo-box {
         width: 80px;
-    }
-    .header-wrapper .content-wrapper h1 {
-        font-size: 2.5rem;
-    }
-    .header-wrapper .content-img {
-        max-height: 200px;
-    }
-    .download-box a {
-        width: 15rem;
     }
 }
 /* values */
@@ -604,6 +583,7 @@ footer .img-box {
     width: 100px;
     height: auto;
     margin-bottom: 1rem;
+    border: 1px solid white;
 }
 footer .img-box img {
     width: 100%;

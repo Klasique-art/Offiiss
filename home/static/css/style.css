@@ -81,7 +81,7 @@ section,footer {
     padding: .5rem 1rem;
     background-color: var(--lightBlue);
     box-shadow: var(--box-shadow);
-    color: var(--white);    
+    color: var(--white);
 }
 .coming {
     pointer-events: none;
@@ -334,7 +334,7 @@ nav {
     padding: 2rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
-} 
+}
 .review-divider h4 {
     text-align: center;
 }

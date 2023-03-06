@@ -52,8 +52,8 @@ def create_user(request):
                 return Response({'status': "User with the specified Email already exists"}, status=status.HTTP_409_CONFLICT)
 
             else:
-                user = User.objects.create(email=email, password=make_password(password), first_name=first_name, last_name=last_name, username=username,telephone_number = telephone_number)
-                user_profile = Profile.objects.create(user=user,user_type = 1,name=user.first_name + ' ' + user.last_name)
+                user = User.objects.create(email=email, password=make_password(password), first_name=first_name, last_name=last_name, username=username)
+                user_profile = Profile.objects.create(user=user,user_type = 1,name=user.first_name + ' ' + user.last_name,telephone_number = telephone_number)
                 return Response({"status": "Account created","profile_id":user_profile.id})
         except Exception as e:
             return Response({'status': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

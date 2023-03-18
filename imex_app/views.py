@@ -57,6 +57,14 @@ def create_user(request):
                 return Response({"status": "Account created","profile_id":user_profile.id})
         except Exception as e:
             return Response({'status': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+@api_view(['POST'])
+def delete_user(request):
+    user_id = request.data['user_id']
+    user = get_object_or_404(User,id=user_id)
+    
+    user.delete()
+    return Response({"status":"Success"})
+
 # api view to create a client
 
 @api_view(['POST'])

@@ -39,14 +39,14 @@ def agents(request):
 def create_user(request):
     if request.method == 'POST':
         try:
-            username = request.data.get('username')
+            
             first_name = request.data.get('first_name')
             last_name = request.data.get('last_name')
             email = request.data.get('email')
             password = request.data.get('password')
             telephone_number = request.data.get('telephone_number')
 
-            if User.objects.filter(username=username).exists():
+            if User.objects.filter(email=email).exists():
                 return Response({'status': "A user with the specified username already exists"}, status=status.HTTP_409_CONFLICT)
             if User.objects.filter(email=email).exists():
                 return Response({'status': "User with the specified Email already exists"}, status=status.HTTP_409_CONFLICT)
@@ -193,15 +193,11 @@ class MyTokenObtainPair(TokenObtainPairSerializer):
         user_profile = Profile.objects.get(user = self.user)
         data['profile_id'] = user_profile.id
         data['user_id'] = self.user.id
-        data['username'] = self.user.username
         data['email'] = self.user.email
         data['first_name'] = self.user.first_name
         data['last_name'] = self.user.last_name
         data['name'] = user_profile.name
-        data['user_type'] = user_profile.get_user_type_display()
         data['image'] = user_profile.image.url
-        data['agent_status'] = user_profile.get_agent_status_display()
-        data['is_email_validated'] = user_profile.is_validated
         data['telephone_number'] = user_profile.telephone_number
         return data
 class MyTokenObtainPairView(TokenObtainPairView):

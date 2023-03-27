@@ -1,13 +1,15 @@
 from django.contrib import admin
-from .models import Profile, Review, AgentType,Order,Code
+from .models import Profile, Review, AgentType,Order,Code,Agent,Transporter
 from django.db.models import Avg
 
 # Register your models here.
+admin.site.register(Agent)
+admin.site.register(Transporter)
 class ProfileAdmin(admin.ModelAdmin):
     model  = Profile
-    list_display = ["id","user", 'name', 'agent_type', 'telephone_number', 'image', 'company', 'company_location', 'company_description', 'city', 'region', 'user_type', 'average_rating','is_sea_port','is_air_port']
-    list_filter = ['user', 'company', 'telephone_number', 'agent_type']
-    search_fields = ("user__username", "name", "company", "city", "region", "telephone_number")
+    list_display = ["id","user", 'name',  'telephone_number', 'image', ]
+    list_filter = ['user', 'telephone_number', ]
+    search_fields = ("user__username", "name", "telephone_number")
     def average_rating(self, obj):
         avg_rate = obj.user.reviews.aggregate(Avg('rating'))
         return avg_rate["rating__avg"]
@@ -36,5 +38,5 @@ admin.site.register(Order,OrderAdmin)
 
 class CodeAdmin(admin.ModelAdmin):
     model = Code
-    list_display = ['user','unique_code','date_generated','expiring_date']
+    list_display = ['email','unique_code','date_generated','expiring_date']
 admin.site.register(Code,CodeAdmin)

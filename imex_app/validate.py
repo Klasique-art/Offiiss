@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 from datetime import timedelta as td
-from .models import Profile, Code
+from .models import Profile, Code,EmialCode
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from datetime import datetime
@@ -18,6 +18,25 @@ def generate_code():
     gen = ss.SystemRandom()
     code = gen.randint(1*1000, 5000)
     return code
+
+
+@api_view(["POST"])
+def generate_email_code(request):
+    email = request.data.get("email")
+    print(email)
+    try:
+        code = EmialCode()
+        
+        code.unique_code = str(generate_code())
+        code.expiring_date = DELTA + code.date_generated
+        code.email = email
+        code.save()
+
+        send_mail("OFFIISS EMAIL ACCOUNT VERIFICATION CODE", f'Use the below code to verify your email address in the offiiss mobile app.\n\r Code: {code.unique_code} \r This code will expire in an hour time.Thank you. \n\n\n Need help? Send an email to our support team at support@offiis.com.', 'accountverification@offiiss.com', [email], fail_silently=True)
+        return Response({"status": "Ok"})
+    except Exception as e:
+        return Response({"status": "Failed"},)
+    
 
 @api_view(["POST"])
 def generate(request):
@@ -40,7 +59,7 @@ def generate(request):
 def verify_email(request):
     code_number = request.data.get("code")
     print(code_number)
-    code = Code.objects.filter(unique_code=code_number)[0]
+    code = EmialCode.objects.filter(unique_code=code_number)[0]
     print(code)
 
     if code:

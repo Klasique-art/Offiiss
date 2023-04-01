@@ -1,10 +1,15 @@
 from django.contrib import admin
-from .models import Profile, Review, AgentType,Order,Code,Agent,Transporter
+from .models import Profile, Review,Order,Code,Agent,Transporter,EmialCode
 from django.db.models import Avg
+from django.contrib.auth.models import User
+from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
+
+
 admin.site.register(Agent)
 admin.site.register(Transporter)
+admin.site.register(EmialCode)
 class ProfileAdmin(admin.ModelAdmin):
     model  = Profile
     list_display = ["id","user", 'name',  'telephone_number', 'image', ]
@@ -18,17 +23,14 @@ admin.site.register(Profile, ProfileAdmin)
 
 class ReviewAdmin(admin.ModelAdmin):
     model  = Review
-    list_display = ['agent','rating', 'date', 'content', 'client']
+    list_display = ['user','rating', 'date', 'content', 'client']
 
 admin.site.register(Review, ReviewAdmin)
 
 admin.site.site_title = "Offiis"
 admin.site.site_header = "Offiis admin"
 
-class AgentTypeAdmin(admin.ModelAdmin):
-    model = AgentType
-    list_display = ['id','type', 'type_image']
-admin.site.register(AgentType, AgentTypeAdmin)
+
 
 class OrderAdmin(admin.ModelAdmin):
     model = Order

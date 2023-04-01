@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Profile, Review, AgentType,Order
+from .models import Profile, Review,Order
 from django.db.models import Count, Avg, Max, Q, Sum
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
@@ -10,6 +10,8 @@ from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.core.exceptions import ObjectDoesNotExist
+import json
+from .serializers import LoginDataSerializer
 
 @api_view(['GET'])
 def agents(request):
@@ -199,6 +201,8 @@ class MyTokenObtainPair(TokenObtainPairSerializer):
         data['name'] = user_profile.name
         data['image'] = user_profile.image.url
         data['telephone_number'] = user_profile.telephone_number
+
+        
         return data
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPair

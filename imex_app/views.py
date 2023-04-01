@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Profile, Review, AgentType,Order
+from .models import Profile, Review,Order
 from django.db.models import Count, Avg, Max, Q, Sum
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
@@ -10,6 +10,8 @@ from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.core.exceptions import ObjectDoesNotExist
+import json
+from .serializers import LoginDataSerializer
 
 @api_view(['GET'])
 def agents(request):
@@ -39,14 +41,14 @@ def agents(request):
 def create_user(request):
     if request.method == 'POST':
         try:
-            username = request.data.get('username')
+            
             first_name = request.data.get('first_name')
             last_name = request.data.get('last_name')
             email = request.data.get('email')
             password = request.data.get('password')
             telephone_number = request.data.get('telephone_number')
 
-            if User.objects.filter(username=username).exists():
+            if User.objects.filter(email=email).exists():
                 return Response({'status': "A user with the specified username already exists"}, status=status.HTTP_409_CONFLICT)
             if User.objects.filter(email=email).exists():
                 return Response({'status': "User with the specified Email already exists"}, status=status.HTTP_409_CONFLICT)
@@ -57,6 +59,14 @@ def create_user(request):
                 return Response({"status": "Account created","profile_id":user_profile.id})
         except Exception as e:
             return Response({'status': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+@api_view(['POST'])
+def delete_user(request):
+    user_id = request.data['user_id']
+    user = get_object_or_404(User,id=user_id)
+    
+    user.delete()
+    return Response({"status":"Success"})
+
 # api view to create a client
 
 @api_view(['POST'])
@@ -185,16 +195,14 @@ class MyTokenObtainPair(TokenObtainPairSerializer):
         user_profile = Profile.objects.get(user = self.user)
         data['profile_id'] = user_profile.id
         data['user_id'] = self.user.id
-        data['username'] = self.user.username
         data['email'] = self.user.email
         data['first_name'] = self.user.first_name
         data['last_name'] = self.user.last_name
         data['name'] = user_profile.name
-        data['user_type'] = user_profile.get_user_type_display()
         data['image'] = user_profile.image.url
-        data['agent_status'] = user_profile.get_agent_status_display()
-        data['is_email_validated'] = user_profile.is_validated
         data['telephone_number'] = user_profile.telephone_number
+
+        
         return data
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPair

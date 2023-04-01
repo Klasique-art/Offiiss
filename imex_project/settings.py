@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 'home',
     'tastypie',
     'imex_app',
+    'user',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',

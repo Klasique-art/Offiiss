@@ -68,7 +68,8 @@ class AgentViewSet(viewsets.ModelViewSet):
             query_set = self.queryset
         
         results = self.paginate_queryset(query_set)
-        serializer = self.serializer_class(results,many=True)
+        serializer = self.serializer_class(results,many=True,context= 
+        {'request': request})
         return self.get_paginated_response(serializer.data)
     
     def create(self, request, *args, **kwargs):
@@ -100,7 +101,8 @@ class TransporterViewSet(viewsets.ModelViewSet):
         # category = request.get("category",None)
         query_set = Transporter.objects.filter()
         results = self.paginate_queryset(query_set)
-        serializer = self.serializer_class(results,many=True)
+        serializer = self.serializer_class(results,many=True,context= 
+        {'request': request})
         return self.get_paginated_response(serializer.data)
     
     def create(self, request, *args, **kwargs):

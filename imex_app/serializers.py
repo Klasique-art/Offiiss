@@ -34,7 +34,6 @@ class ImageSerializer(serializers.ModelSerializer):
 class AgentSerializer(serializers.ModelSerializer):
     num_reviews = serializers.SerializerMethodField()
     rating = serializers.SerializerMethodField()
-    
 
     class Meta:
         model = Agent
@@ -49,6 +48,7 @@ class AgentSerializer(serializers.ModelSerializer):
             return obj.user.reviews.aggregate(Sum('rating'))['rating__sum']/obj.user.reviews.aggregate(Count('rating'))['rating__count']
         except TypeError:
             return 0.0
+    
 class TransporterSerializer(serializers.ModelSerializer):
     num_reviews = serializers.SerializerMethodField()
     rating = serializers.SerializerMethodField()

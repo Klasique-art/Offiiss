@@ -201,6 +201,7 @@ class MyTokenObtainPair(TokenObtainPairSerializer):
         data['name'] = user_profile.name
         data['image'] = user_profile.image.url
         data['telephone_number'] = user_profile.telephone_number
+        
 
         
         return data

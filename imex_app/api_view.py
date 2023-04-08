@@ -1,6 +1,7 @@
-from .models import Profile,Agent,Transporter
+from .models import Profile,Agent,Transporter,AgentReview,TransporterReview
 from rest_framework import viewsets
-from .serializers import ImageSerializer, ProfileSerializer,UserSerializer,AgentSerializer,TransporterSerializer
+from rest_framework.views import APIView
+from .serializers import AgentReviewSerializer,TransporterReviewSerializer, ImageSerializer, ProfileSerializer,UserSerializer,AgentSerializer,TransporterSerializer
 from rest_framework import permissions
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.contrib.auth.models import User
@@ -10,6 +11,8 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 from rest_framework.pagination import PageNumberPagination
 from .pagination import StandardResultsSetPagination
+from django.db.models import Q
+
 class UserViewSet(viewsets.ViewSet):
     queryset = User.objects.all()
    
@@ -121,8 +124,61 @@ class TransporterViewSet(viewsets.ModelViewSet):
         except:
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class AgentReviewViewSet(viewsets.ViewSet):
+    serializer_class = AgentReviewSerializer
+    queryset = AgentReview.objects.all()
+    def create(self,request,*args, **kwargs):
+        data = request.data
         
+        serializer = self.serializer_class(data=data)
             
+        try:
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        except:
+            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def list(self,request):
+        agent = Agent.objects.get(pk=request.GET.get("agent",None))
+        queryset = self.queryset.filter(agent=agent)
+        serializer = self.serializer_class(queryset,many=True,context={"request":request})
+        return Response(serializer.data)
+
+
+class TransporterReviewViewSet(viewsets.ViewSet):
+    serializer_class = TransporterReviewSerializer
+    queryset = TransporterReview.objects.all()
+    def create(self,request,*args, **kwargs):
+        data = request.data
+        
+        serializer = self.serializer_class(data=data)
+            
+        try:
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        except:
+            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def list(self,request):
+        transporter = Transporter.objects.get(pk=request.GET.get("transporter",None))
+        queryset = self.queryset.filter(transporter=transporter)
+        serializer = self.serializer_class(queryset,many=True)
+        return Response(serializer.data)
+        
+
+
+
+class SearchView(APIView):
+    def get(self,request):
+        query = request.GET.get('query',None)
+        agents = Agent.objects.filter(Q(agent_name__contains = query)| Q(company_name__contains = query) | Q(location__contains = query))
+        transporters = Transporter.objects.filter(Q(driver_name__contains = query) | Q(location__contains = query))
+
+        
+        
+        return Response({"agents":AgentSerializer(agents,many=True,context= 
+        {'request': request}).data,"transporters":TransporterSerializer(transporters,many=True,context= 
+        {'request': request}).data})
 
 class ProfileView(viewsets.ModelViewSet):
     queryset = Profile.objects.all()

@@ -114,7 +114,7 @@ soupsieve==2.3.2.post1
 sqlparse==0.4.2
 timeago==1.0.16
 Twisted==22.10.0
-twisted-iocpsupport==1.0.2
+
 txaio==22.2.1
 typing_extensions==4.4.0
 tzdata==2022.2

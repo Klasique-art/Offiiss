@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Chat Room: {{ room_name }}{% endblock %}
+
+{% block content %}
+  <h1 class="my-4">Chat Room: {{ room_name }}</h1>
+
+  <div id="chat-messages"></div>
+
+  <form id="chat-form">
+    <div class="input-group">
+      <input type="text" class="form-control" id="chat-input" placeholder="Type a message...">
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-primary">Send</button>
+      </div>
+    </div>
+  </form>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    const roomName = "{{ room_name }}";
+    const chatSocket = new WebSocket(
+      'ws://' + window.location.host + '/ws/chat/' + roomName + '/');
+
+    const chatMessages = document.querySelector('#chat-messages');
+
+    chatSocket.onmessage = function(event) {
+      const message = JSON.parse(event.data);
+      if (message.message) {
+        chatMessages.innerHTML += (
+          '<div class="card my-2">' +
+          '<div class="card-body">' +
+          '<h5 class="card-title">' + message.username + '</h5>' +
+          '<p class="card-text">' + message.message + '</p>' +
+          '</div>' +
+          '</div>'
+        );
+      } else {
+        console.error('Invalid message:', message);
+      }
+    };
+
+    document.querySelector('#chat-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const messageInputDom = document.querySelector('#chat-input');
+      const message = messageInputDom.value;
+      chatSocket.send(JSON.stringify({
+        'message': message
+      }));
+      messageInputDom.value = '';
+    });
+  </script>
+{% endblock %}

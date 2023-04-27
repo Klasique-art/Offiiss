@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ room_name }}</h1>
+
+<div id="chat-messages">
+  {% for message in messages %}
+  <div class="message">
+    <strong>{{ message.username }}</strong> {{ message.timestamp }}<br>
+    {{ message.content }}
+  </div>
+  {% endfor %}
+</div>
+
+<form id="chat-form">
+  <input type="text" id="chat-input">
+  <button type="submit">Send</button>
+</form>
+
+<script src="{% static 'js/chat.js' %}">
+
+    const chatSocket = new WebSocket(
+    'ws://' + window.location.host +
+    '/ws/chat/' + roomName + '/');
+
+chatSocket.onopen = function(event) {
+    console.log('WebSocket connection established.');
+};
+
+chatSocket.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+    console.log('Message received:', data);
+    // Handle incoming messages here.
+};
+
+chatSocket.onclose = function(event) {
+    console.log('WebSocket connection closed.');
+};
+</script>
+{% endblock %}

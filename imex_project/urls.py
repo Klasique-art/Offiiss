@@ -29,6 +29,7 @@ path('sewonet_apis/offiiss_api/api_v1/', include('imex_app.urls'),),
 path('sitemap.xml', sitemap, # new
         {'sitemaps': maps},
         name='django.contrib.sitemaps.views.sitemap'),
+path('chat/',include('chat.urls'),name='chat'),
 ]
 
 if settings.DEBUG:

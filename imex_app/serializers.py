@@ -56,7 +56,7 @@ class TransporterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transporter
         fields = ['id', 'user', 'driver_name', 'driver_phone', 'location','description', 'profile_image','driver_license_number',"trailer_axle","triiler_type","triiler_length","trucks_plate_number",
-            "license_number","trailer_license_plate",'rating','num_reviews','cover_image','created_at','updated_at','status']
+            "license_number","trailer_license_plate",'rating','num_reviews','vehicle_1','vehicle_2','vehicle_3','vehicle_4','created_at','updated_at','status']
     def get_num_reviews(sef,obj):
         try:
             return obj.user.reviews.aggregate(Count('rating'))['rating__count']

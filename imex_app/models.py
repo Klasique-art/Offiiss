@@ -124,7 +124,10 @@ class Transporter(models.Model):
     trailer_license_plate = models.CharField(max_length=50,blank=True,null=True)
     description = models.CharField(max_length=300,blank=True,null=True)
     profile_image = models.ImageField(upload_to='profile', null=True, blank=True,default = '/profile/profile1.jpeg')
-    cover_image = models.ImageField(upload_to='cover', null=True, blank=True,default = '/cover/header.png')
+    vehicle_1 = models.ImageField(upload_to='vehicles', null=True, blank=True,default = '/cover/header.png')
+    vehicle_2 = models.ImageField(upload_to='vehicles', null=True, blank=True,default = '/cover/header.png')
+    vehicle_3 = models.ImageField(upload_to='vehicles', null=True, blank=True,default = '/cover/header.png')
+    vehicle_4 = models.ImageField(upload_to='vehicles', null=True, blank=True,default = '/cover/header.png')
     TRANSPORTER_STATUS_CHOICES = (
         (1, 'pending'),
         (2, 'active'),
@@ -150,6 +153,7 @@ class AgentReview(models.Model):
 class TransporterReview(models.Model):
     transporter = models.ForeignKey(Transporter, on_delete=models.CASCADE, related_name='transporter_reviews')
     client = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='transporter_client',null = True,blank=True)
+
     date = models.DateTimeField(default=now)
     content = models.TextField(max_length = 250,null = True,blank = True)
     rating = models.DecimalField(max_digits = 2,decimal_places = 1,null = True,blank = True)

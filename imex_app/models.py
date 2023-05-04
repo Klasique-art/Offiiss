@@ -9,7 +9,7 @@ from django.utils.timezone import now
 class Profile(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    telephone_number = models.CharField(max_length=15, null=True, blank=True)
+    telephone_number = models.CharField(max_length=20, null=True, blank=True)
     image = models.ImageField(upload_to='profile', null=True, blank=True,default = '/profile/profile1.jpeg')
     is_agent = models.BooleanField(default=False)
     is_driver = models.BooleanField(default=False)

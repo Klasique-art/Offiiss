@@ -31,7 +31,7 @@ class UserViewSet(viewsets.ViewSet):
             user.password = make_password(data['password'])
             user.username = data["email"]
             user.save()
-            user_profile = Profile.objects.create(user = user,telephone_number = data["telephone_number"])
+            user_profile = Profile.objects.create(user = user,telephone_number = data["telephone_number"],name = data["name"])
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         
     def retrieve(self, request, pk=None):
